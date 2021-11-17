@@ -1,24 +1,24 @@
 
-public class square {
-	private Piece piece;
+public class quadrado {
+	private Peça peça;
 	private int x;
 	private int y;
 	
-	public square(int x, int y, Piece piece)
+	public quadrado(int x, int y, Peça peça)
 	{
-		this.setPiece(piece);
 		this.setX(x);
 		this.setY(y);
+		this.setPeça(peça);
 	}
 	
-	public void setPiece(Piece p)
+	public void setPeça(Peça p)
 	{
-		this.piece = p;
+		this.peça = p;
 	}
 	
-	public void getPiece()
+	public void getPeça()
 	{
-		return this.piece;
+		return this.peça;
 	}
 	
 	public void setX(int x)
