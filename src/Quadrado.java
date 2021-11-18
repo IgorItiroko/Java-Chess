@@ -16,7 +16,7 @@ public class Quadrado {
 		this.peça = p;
 	}
 	
-	public void getPeça()
+	public Peça getPeça()
 	{
 		return this.peça;
 	}
@@ -26,7 +26,7 @@ public class Quadrado {
 		this.x = x;
 	}
 	
-	public void getX()
+	public int getX()
 	{
 		return this.x;
 	}
@@ -36,7 +36,7 @@ public class Quadrado {
 		this.y = y;
 	}
 	
-	public void getY(int y)
+	public int getY()
 	{
 		return this.y;
 	}
