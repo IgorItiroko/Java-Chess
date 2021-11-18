@@ -1,16 +1,35 @@
+import java.awt.EventQueue;
 import java.util.List;
 
-public class Jogo {
+public class Jogo{
 	private Tabuleiro tabuleiro;
-	private Jogador[] jogadores;
+	private static Jogador[] jogadores = new Jogador[2];
 	private Jogador turno;
 	private List<String> Jogadas;
 	private String codigo[];
+	public Telainicial tela;
+	
+	
+	public static void main(String[] args) {
+		jogadores[0] = new Jogador(true);
+		jogadores[1] = new Jogador(false);
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Telainicial window = new Telainicial(jogadores[0],jogadores[1]);
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		
+
+		
+	}
 	
 	private void iniciar(Jogador j1, Jogador j2)
 	{
-		jogadores[0] = j1;
-		jogadores[1] = j2;
 		tabuleiro = new Tabuleiro();
 		if(j1.isLadobranco()) {
 			this.turno = j1;
@@ -21,21 +40,6 @@ public class Jogo {
 		Jogadas.clear();
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
-
-
 	
 	public String codigo (int x, int y)
 	{
