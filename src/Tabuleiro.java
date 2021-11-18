@@ -7,9 +7,9 @@ public class Tabuleiro {
 		this.resetTabuleiro();
 	}
 	
-	public quadrado validade (int x, int y)
+	public Quadrado validade (int x, int y)
 	{
-		if(x < 0 || x > 7 || y < 0 || y > 7)
+		///if(x < 0 || x > 7 || y < 0 || y > 7)
 			/// Interface de jogada invalida, jogada fora do limite
 		return campo[x][y];
 	}

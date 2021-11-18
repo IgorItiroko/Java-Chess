@@ -1,5 +1,5 @@
 
-public class Peça {
+public abstract class Peça {
 	private boolean viva = true;
 	private boolean branca = false;
 	
@@ -8,9 +8,9 @@ public class Peça {
 		this.setBranca(branca);
 	}
 	
-	public boolean getBranca()
+	public boolean isBranca()
 	{
-		return this.isBranca;
+		return this.branca;
 	}
 	
 	public void setBranca(boolean branca)
@@ -18,7 +18,7 @@ public class Peça {
 		this.branca = branca;
 	}
 	
-	public boolean getViva()
+	public boolean isViva()
 	{
 		return this.viva;
 	}

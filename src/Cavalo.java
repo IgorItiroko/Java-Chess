@@ -1,4 +1,4 @@
 
-public class Cavalo extends peça{
+public class Cavalo extends Peça{
 
 }
