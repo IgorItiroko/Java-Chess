@@ -1,4 +1,4 @@
 
-public class rook extends piece{
+public class Torre extends Peça{
 
 }

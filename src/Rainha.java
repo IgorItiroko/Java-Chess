@@ -1,4 +1,4 @@
 
-public class queen extends piece {
+public class Rainha extends Peça {
 
 }

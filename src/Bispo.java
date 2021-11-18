@@ -1,4 +1,4 @@
 
-public class bispo extends peça{
+public class Bispo extends peça{
 
 }

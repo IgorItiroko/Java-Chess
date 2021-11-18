@@ -1,10 +1,10 @@
 
-public class quadrado {
+public class Quadrado {
 	private Peça peça;
 	private int x;
 	private int y;
 	
-	public quadrado(int x, int y, Peça peça)
+	public Quadrado(int x, int y, Peça peça)
 	{
 		this.setX(x);
 		this.setY(y);

@@ -1,9 +1,9 @@
 
-public class peça {
+public class Peça {
 	private boolean viva = true;
 	private boolean branca = false;
 	
-	public Piece(boolean branca)
+	public Peça(boolean branca)
 	{
 		this.setBranca(branca);
 	}

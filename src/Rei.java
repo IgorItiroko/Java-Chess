@@ -1,4 +1,4 @@
 
-public class king extends piece {
+public class Rei extends Peça {
 
 }
