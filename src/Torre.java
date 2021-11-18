@@ -14,7 +14,7 @@ public class Torre extends Peça{
 		if(inicio.getX() != fim.getX() && inicio.getY() != fim.getY()  ) {
 			return false;
 		}
-
+		///damn
 		
 		String direção ="";
 		

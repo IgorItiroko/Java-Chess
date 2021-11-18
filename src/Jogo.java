@@ -21,8 +21,6 @@ public class Jogo {
 		Jogadas.clear();
 	}
 	
-	;
-	
 	
 	
 	
