@@ -14,7 +14,6 @@ public class Torre extends Peça{
 		if(inicio.getX() != fim.getX() && inicio.getY() != fim.getY()  ) {
 			return false;
 		}
-		///damn
 		
 		String direção ="";
 		
@@ -33,17 +32,7 @@ public class Torre extends Peça{
 		if(fim.getX() < inicio.getX()) {
 			direção = "oeste";
 		}
-		
-		/* if(direction.equals("south")) {
-	        	int spaces_to_move = Math.abs(destination_y - this.getY());
-	        	
-	        	for( int i=1; i<spaces_to_move;i++) {
-	        		Piece p = board.getPiece(this.getX(), this.getY() + i);
-	        		if(p != null) {
-	        			return false;
-	        		}
-	        	}
-	        }*/
+
 		if(direção.equals("sul")) {
 			int movimento = Math.abs(fim.getY() - inicio.getY());
 			for(int i=1; i<movimento ;i++) {

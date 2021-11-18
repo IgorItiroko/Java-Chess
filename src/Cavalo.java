@@ -9,6 +9,15 @@ public class Cavalo extends Peça{
 		if(fim.getPeça().isBranca() == this.isBranca()) {
 			return false;
 		}
+		
+		int x = Math.abs(fim.getX() - inicio.getX());
+		int y = Math.abs(fim.getY() - inicio.getY() );
+		
+		    //Proibição de qualquer movimento além do exclusivo para cavalos
+			if(x * y != 2) {
+				return false;
+			}
+			
 		return true;
 	}
 
