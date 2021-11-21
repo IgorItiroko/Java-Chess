@@ -11,25 +11,14 @@ public class Jogo{
 	
 	
 	public static void main(String[] args) {
-		jogadores[0] = new Jogador(true);
-		jogadores[1] = new Jogador(false);
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Telainicial window = new Telainicial(jogadores[0],jogadores[1]);
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-		
 
 		
 	}
 	
 	private void iniciar(Jogador j1, Jogador j2)
 	{
+		jogadores[0] = j1;
+		jogadores[1] = j2;
 		tabuleiro = new Tabuleiro();
 		if(j1.isLadobranco()) {
 			this.turno = j1;
@@ -40,23 +29,56 @@ public class Jogo{
 		Jogadas.clear();
 	}
 	
-	
-	public String codigo (int x, int y)
+	public boolean construtorJogada(Jogador j1, int Xinicial, int Yinicial, int Xfinal, int Yfinal) throws Exception
 	{
-		switch(x)
+		Quadrado iniPos = tabuleiro.validade(Xinicial, Yinicial);
+		Quadrado fimPos = tabuleiro.validade(Xfinal, Yfinal);
+		Mov move = new Mov(j1,iniPos,fimPos);
+		return this.Jogada(move,j1);
+	}
+	
+	public boolean Jogada(Mov move, Jogador j)
+	{
+		Peça escolhida = move.getIni().getPeça();
+		if (escolhida == null)
 		{
-		case 0: codigo[0] = "a";
-		case 1: codigo[0] = "b";
-		case 2: codigo[0] = "c";
-		case 3: codigo[0] = "d";
-		case 4: codigo[0] = "e";
-		case 5: codigo[0] = "f";
-		case 6: codigo[0] = "g";
-		case 7: codigo[0] = "h";
+			return false;
 		}
-		codigo[1] = Integer.toString(y + 1);
-		String concatena = codigo[0] + codigo[1];
-		return concatena;
+		
+		if(j != turno)
+		{
+			return false;
+		}
+		
+		if(escolhida.isBranca() != j.isLadobranco())
+		{
+			return false;
+		}
+		
+		if (!escolhida.canMove(tabuleiro, move.getIni(), move.getFim())) {
+			return false;
+		}
+		
+		Peça destino = move.getIni().getPeça();
+		if(destino != null)
+		{
+			destino.setViva(false);
+			
+		}
+		
+		move.getFim().setPeça(move.getIni().getPeça());
+		move.getIni().setPeça(null);
+		
+		if(this.turno == jogadores[0])
+		{
+			this.turno = jogadores[1];
+		}
+		else {
+			this.turno = jogadores[0];
+		}
+		return true;
+
+		
 	}
 
 }

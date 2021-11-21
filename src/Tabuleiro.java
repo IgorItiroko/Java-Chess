@@ -7,10 +7,10 @@ public class Tabuleiro {
 		this.resetTabuleiro();
 	}
 	
-	public Quadrado validade (int x, int y)
+	public Quadrado validade (int x, int y) throws Exception
 	{
-		///if(x < 0 || x > 7 || y < 0 || y > 7)
-			/// Interface de jogada invalida, jogada fora do limite
+		if(x < 0 || x > 7 || y < 0 || y > 7)
+		 throw new Exception("Index out of bound"); // Alterar para exibição de erro.
 		return campo[x][y];
 	}
 	public void resetTabuleiro()
