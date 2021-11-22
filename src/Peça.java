@@ -2,12 +2,17 @@
 public abstract class Peça {
 	private boolean viva = true;
 	private boolean branca = false;
+	public int identidade;
 	
-	public Peça(boolean branca)
+	
+	public Peça(boolean branca,int identidade)
 	{
 		this.setBranca(branca);
+		this.identidade = identidade;
 	}
-	
+	public int getIdentidade() {
+		return identidade;
+	}
 	public boolean isBranca()
 	{
 		return this.branca;
@@ -29,4 +34,6 @@ public abstract class Peça {
 	}
 	
 	public abstract boolean canMove(Tabuleiro tabuleiro,Quadrado inicio,Quadrado fim);
+	
+	
 }

@@ -1,8 +1,11 @@
 
 public class Cavalo extends Peça{
-	public Cavalo (boolean branca) {
-		 super(branca);
+	public int identidade;
+	public Cavalo (boolean branca, int identidade) {
+		 super(branca,identidade);
+		
 	}
+	
 	public boolean canMove(Tabuleiro tabuleiro,Quadrado inicio,Quadrado fim) {
 		
 		//proibe de mover a peça para um lugar que tenha uma peça de mesma cor

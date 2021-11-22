@@ -1,12 +1,13 @@
 
 public class Peão extends Peça{
 	public boolean primeiroMovimento;
-	
-	public Peão (boolean branca) {
-		 super(branca);
+	public int identidade;
+	public Peão (boolean branca, int identidade) {
+		 super(branca,identidade);
 		 primeiroMovimento = true;
+
 	}
-	
+
 	public void setPrimeiroMovimento(boolean primeiroMovimento) {
 		this.primeiroMovimento = primeiroMovimento;
 	}

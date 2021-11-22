@@ -1,8 +1,12 @@
 
 public class Bispo extends Peça{
-	public Bispo (boolean branca) {
-		 super(branca);
+	public int identidade;
+	public Bispo (boolean branca,int identidade) {
+		 super(branca,identidade);
+
 	}
+	
+
 	public boolean canMove(Tabuleiro tabuleiro,Quadrado inicio,Quadrado fim) {
 		
 		//proibe de mover a peça para um lugar que tenha uma peça de mesma cor

@@ -22,6 +22,7 @@ public class Jogo {
 	}
 	
 	
+<<<<<<< Updated upstream
 	
 	
 	
@@ -38,6 +39,13 @@ public class Jogo {
 
 	
 	public String codigo (int x, int y)
+=======
+	public void setTabuleiro(Tabuleiro tabuleiro) {
+		this.tabuleiro = tabuleiro;
+	}
+
+	public boolean Jogada(Mov move, Jogador j)
+>>>>>>> Stashed changes
 	{
 		switch(x)
 		{
