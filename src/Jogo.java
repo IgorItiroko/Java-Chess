@@ -10,11 +10,6 @@ public class Jogo{
 	public Telainicial tela;
 	
 	
-	public static void main(String[] args) {
-
-		
-	}
-	
 	private void iniciar(Jogador j1, Jogador j2)
 	{
 		jogadores[0] = j1;
