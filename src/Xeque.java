@@ -55,5 +55,45 @@ public class Xeque {
         }
         return false;
     }
+    public boolean xequematedetect(Tabuleiro tabuleiro, boolean branco)
+    {
+    	if(branco)
+    	{
+	    	for(int i = 0; i < 7; i++)
+	    	{
+	    		for(int j = 0; j < 7; j++)
+	    		{
+	    			for(int p = 0; p < 7; p++)
+	    			{
+	    				for(int q = 0; q < 7; q++)
+	    				{
+	    					if(tabuleiro.campo[i][j].getPeça().isBranca())
+	    						if(tabuleiro.campo[i][j].getPeça().canMove(tabuleiro, tabuleiro.campo[i][j], tabuleiro.campo[p][q]))
+	    							return false;
+	    				}	
+	    			}
+	    		}
+	    	}
+    	}
+    	else
+    	{
+	    	for(int i = 0; i < 7; i++)
+	    	{
+	    		for(int j = 0; j < 7; j++)
+	    		{
+	    			for(int p = 0; p < 7; p++)
+	    			{
+	    				for(int q = 0; q < 7; q++)
+	    				{
+	    					if(!tabuleiro.campo[i][j].getPeça().isBranca())
+	    						if(tabuleiro.campo[i][j].getPeça().canMove(tabuleiro, tabuleiro.campo[i][j], tabuleiro.campo[p][q]))
+	    							return false;
+	    				}	
+	    			}
+	    		}
+	    	}
+    	}	
+    	return true;
+    }
     
 }
