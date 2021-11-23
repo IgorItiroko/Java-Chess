@@ -1,5 +1,8 @@
+import javax.swing.JComponent;
 
-public class Tabuleiro {
+
+@SuppressWarnings("serial")
+public class Tabuleiro extends JComponent {
 	Quadrado[][] campo;
 	
 	public Tabuleiro()
@@ -61,3 +64,10 @@ public class Tabuleiro {
 
 	}
 }
+	
+	 
+	
+
+
+
+	   

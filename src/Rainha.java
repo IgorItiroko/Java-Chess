@@ -4,7 +4,8 @@ public class Rainha extends Peça {
 	public Rainha (boolean branca, int identidade) {
 		 super(branca,identidade);
 	}
-
+	public Quadrado fRainha;
+	
 	public boolean canMove(Tabuleiro tabuleiro,Quadrado inicio,Quadrado fim) {
 		
 		//proibe de mover a peça para um lugar que tenha uma peça de mesma cor
@@ -141,7 +142,15 @@ public class Rainha extends Peça {
 				}
 			}
 			
-		
+			fRainha = tabuleiro.campo[fim.getX()][fim.getY()];
+			Tabuleiro tfRainha = new Tabuleiro();
+			tfRainha = tabuleiro;
+			tfRainha.campo[fim.getX()][fim.getY()] = fRainha;
+			
+			Xeque xeqBispo = new Xeque();
+			if(xeqBispo.xequedetect(tfRainha, this.isBranca())){
+				return false;
+			}
 		return true;
 	}
 

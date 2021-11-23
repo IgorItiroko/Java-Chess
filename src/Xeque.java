@@ -3,6 +3,7 @@ public class Xeque {
     public boolean branco;
     public Quadrado reibranco;
     public Quadrado reipreto;
+    
     public boolean xequedetect(Tabuleiro tabuleiro, boolean branco)
     {
         if(branco == true)

@@ -7,7 +7,8 @@ public class Peão extends Peça{
 		 primeiroMovimento = true;
 
 	}
-
+	public Quadrado fPeão;
+	
 	public void setPrimeiroMovimento(boolean primeiroMovimento) {
 		this.primeiroMovimento = primeiroMovimento;
 	}
@@ -65,7 +66,15 @@ public class Peão extends Peça{
 					return false;
 				}				
 			}
+		fPeão = tabuleiro.campo[fim.getX()][fim.getY()];
+		Tabuleiro tfPeão = new Tabuleiro();
+		tfPeão = tabuleiro;
+		tfPeão.campo[fim.getX()][fim.getY()] = fPeão;
 		
+		Xeque xeqBispo = new Xeque();
+		if(xeqBispo.xequedetect(tfPeão, this.isBranca())){
+			return false;
+		}
 		setPrimeiroMovimento(false);
 		return true;
 	}

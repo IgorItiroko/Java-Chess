@@ -27,7 +27,7 @@ public class Rei extends Peça {
 		for(int p=0; p<7 ;p++) {
 			for(int q=0; q<7 ; q++) {
 				if(tabuleiroF.campo[p][q] != null) {
-					if(tabuleiroF.campo[p][q].getPeça().canMove(tabuleiroF, tabuleiroF.campo[p][q], Rei)) {
+					if(tabuleiroF.campo[p][q].getPeça().canMove(tabuleiroF, tabuleiroF.campo[p][q], tabuleiroF.campo[fim.getX()][fim.getY()])) {
 						return false;
 					}
 				}		
