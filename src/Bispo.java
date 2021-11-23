@@ -1,8 +1,13 @@
 
 public class Bispo extends Peça{
-	public Bispo (boolean branca) {
-		 super(branca);
+	public int identidade;
+	public Bispo (boolean branca,int identidade) {
+		 super(branca,identidade);
+
 	}
+	
+	public Quadrado fBispo;
+	
 	public boolean canMove(Tabuleiro tabuleiro,Quadrado inicio,Quadrado fim) {
 		
 		//proibe de mover a peça para um lugar que tenha uma peça de mesma cor
@@ -79,6 +84,15 @@ public class Bispo extends Peça{
 					}
 			}
 			
+		}
+		fBispo = tabuleiro.campo[fim.getX()][fim.getY()];
+		Tabuleiro tfBispo = new Tabuleiro();
+		tfBispo = tabuleiro;
+		tfBispo.campo[fim.getX()][fim.getY()] = fBispo;
+		
+		Xeque xeqBispo = new Xeque();
+		if(xeqBispo.xequedetect(tfBispo, this.isBranca())){
+			return false;
 		}
 
 		return true;
