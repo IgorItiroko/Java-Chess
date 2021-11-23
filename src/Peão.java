@@ -1,11 +1,13 @@
 
 public class Peão extends Peça{
 	public boolean primeiroMovimento;
-	
-	public Peão (boolean branca) {
-		 super(branca);
+	public int identidade;
+	public Peão (boolean branca, int identidade) {
+		 super(branca,identidade);
 		 primeiroMovimento = true;
+
 	}
+	public Quadrado fPeão;
 	
 	public void setPrimeiroMovimento(boolean primeiroMovimento) {
 		this.primeiroMovimento = primeiroMovimento;
@@ -64,7 +66,15 @@ public class Peão extends Peça{
 					return false;
 				}				
 			}
+		fPeão = tabuleiro.campo[fim.getX()][fim.getY()];
+		Tabuleiro tfPeão = new Tabuleiro();
+		tfPeão = tabuleiro;
+		tfPeão.campo[fim.getX()][fim.getY()] = fPeão;
 		
+		Xeque xeqBispo = new Xeque();
+		if(xeqBispo.xequedetect(tfPeão, this.isBranca())){
+			return false;
+		}
 		setPrimeiroMovimento(false);
 		return true;
 	}
