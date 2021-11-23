@@ -2,15 +2,15 @@ import java.awt.EventQueue;
 import java.util.List;
 
 public class Jogo{
-	private Tabuleiro tabuleiro;
-	private static Jogador[] jogadores = new Jogador[2];
-	private Jogador turno;
-	private List<String> Jogadas;
-	private String codigo[];
+	public Tabuleiro tabuleiro;
+	public static Jogador[] jogadores = new Jogador[2];
+	public Jogador turno;
+	public List<String> Jogadas;
+	public String codigo[];
 	public Telainicial tela;
 	
 	
-	private void iniciar(Jogador j1, Jogador j2)
+	void iniciar(Jogador j1, Jogador j2)
 	{
 		jogadores[0] = j1;
 		jogadores[1] = j2;
@@ -21,15 +21,14 @@ public class Jogo{
 		else {
 			this.turno = j2;
 		}
-		Jogadas.clear();
 	}
 	
-	public boolean construtorJogada(Jogador j1, int Xinicial, int Yinicial, int Xfinal, int Yfinal) throws Exception
+	public boolean construtorJogada(Jogador j1, int Xinicial, int Yinicial, int Xfinal, int Yfinal, Xeque xeque) throws Exception
 	{
 		Quadrado iniPos = tabuleiro.validade(Xinicial, Yinicial);
 		Quadrado fimPos = tabuleiro.validade(Xfinal, Yfinal);
 		Mov move = new Mov(j1,iniPos,fimPos);
-		return this.Jogada(move,j1);
+		return this.Jogada(move,j1,xeque);
 	}
 	
 	public boolean Jogada(Mov move, Jogador j, Xeque xeque)

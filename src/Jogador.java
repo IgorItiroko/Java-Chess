@@ -1,5 +1,5 @@
 
-public class Jogador {
+public class Jogador{
 	public boolean ladobranco;
 	public String nome;
 	
