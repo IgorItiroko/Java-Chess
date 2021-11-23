@@ -32,7 +32,7 @@ public class Jogo{
 		return this.Jogada(move,j1);
 	}
 	
-	public boolean Jogada(Mov move, Jogador j)
+	public boolean Jogada(Mov move, Jogador j, Xeque xeque)
 	{
 		Peça escolhida = move.getIni().getPeça();
 		if (escolhida == null)
@@ -64,6 +64,24 @@ public class Jogo{
 		move.getFim().setPeça(move.getIni().getPeça());
 		move.getIni().setPeça(null);
 		
+		if(xeque.xequedetect(tabuleiro, j.isLadobranco() && j.isLadobranco()))
+		{
+			System.out.println("Jogador do lado branco em xeque!");
+		}
+		
+		if(xeque.xequedetect(tabuleiro, j.isLadobranco() && !j.isLadobranco()))
+		{
+			System.out.println("Jogador do lado preto em xeque!");
+		}
+		
+		if(xeque.xequematedetect(tabuleiro, j.isLadobranco() && j.isLadobranco()))
+		{
+			System.out.println("Jogador do lado preto ganhou!");
+		}
+		if(xeque.xequematedetect(tabuleiro, j.isLadobranco() && !j.isLadobranco()))
+		{
+			System.out.println("Jogador do lado branco ganhou!");
+		}
 		if(this.turno == jogadores[0])
 		{
 			this.turno = jogadores[1];
