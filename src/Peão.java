@@ -32,16 +32,16 @@ public class Peão extends Peça{
 		}
 				
 		//proibe de mover a peça na diagonal caso não haja nenhuma peça do oponente
-		if(tabuleiro.campo[inicio.getX() + 1][inicio.getY() + 1].getPeça() == null) {
+		if(tabuleiro.campo[inicio.getX() + 1][inicio.getY() + 1].getPeça() != null && tabuleiro.campo[inicio.getX() + 1][inicio.getY() + 1].getPeça().isBranca() != this.isBranca() ) {
 			return false;
 		}
 				
 		//proibe de mover a peça para um lugar que tenha uma peça de mesma cor
-		if(fim.getPeça().isBranca() == this.isBranca()) {
+		if(fim.getPeça() != null && fim.getPeça().isBranca() == this.isBranca()) {
 			return false;
 		}
 		//proibe de mover a peça na horizontal
-		if(fim.getX() != inicio.getX() && fim.getY() == inicio.getY()) {
+		if(fim.getX() == inicio.getX() && fim.getY() != inicio.getY()) {
 			return false;
 		}
 		
@@ -56,17 +56,18 @@ public class Peão extends Peça{
 		
 		//processos de verificação de peças no caminho desejado
 		if(direção.equals("sul")) {
-				if(tabuleiro.campo[inicio.getX()][inicio.getY()+1].getPeça()!=null) {
+				if(tabuleiro.campo[inicio.getX()+1][inicio.getY()].getPeça()!=null) {
 					return false;					
 			}
 		}
 		
 		if(direção.equals("norte")) {
-				if(tabuleiro.campo[inicio.getX()][inicio.getY()-1].getPeça()!=null) {
+				if(tabuleiro.campo[inicio.getX()-1][inicio.getY()].getPeça()!=null) {
 					return false;
 				}				
 			}
-		fPeão = tabuleiro.campo[fim.getX()][fim.getY()];
+		
+		/*fPeão = tabuleiro.campo[fim.getX()][fim.getY()];
 		Tabuleiro tfPeão = new Tabuleiro();
 		tfPeão = tabuleiro;
 		tfPeão.campo[fim.getX()][fim.getY()] = fPeão;
@@ -75,6 +76,7 @@ public class Peão extends Peça{
 		if(xeqBispo.xequedetect(tfPeão, this.isBranca())){
 			return false;
 		}
+		*/
 		setPrimeiroMovimento(false);
 		return true;
 	}

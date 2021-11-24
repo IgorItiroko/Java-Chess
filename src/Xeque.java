@@ -8,18 +8,18 @@ public class Xeque {
     {
         if(branco == true)
         {
-            for(int i = 0; i < 8; i++)
+            for(int i = 0; i < 7; i++)
             {
-                for(int j = 0; j < 8; j++)
+                for(int j = 0; j < 7; j++)
                 {
-                    if(tabuleiro.campo[i][j].getPeça().getIdentidade() == 5 && tabuleiro.campo[i][j].getPeça().isBranca() == true)
+                    if(tabuleiro.campo[i][j].getPeça() != null && (tabuleiro.campo[i][j].getPeça().getIdentidade() == 5 && tabuleiro.campo[i][j].getPeça().isBranca() == true ) )
                     {
                         reibranco = tabuleiro.campo[i][j];
-                        for(int p = 0; p < 8; p++)
+                        for(int p = 0; p < 7; p++)
                         {
-                            for(int q = 0; q < 8; q++)
+                            for(int q = 0; q < 7; q++)
                             {
-                                if(tabuleiro.campo[p][q].getPeça().canMove(tabuleiro, tabuleiro.campo[p][q], reibranco) == true)
+                                if(tabuleiro.campo[p][q].getPeça()!=null && tabuleiro.campo[p][q].getPeça().canMove(tabuleiro, tabuleiro.campo[p][q], reibranco) == true)
                                 {
                                     return true;
                                 }
@@ -32,18 +32,18 @@ public class Xeque {
         
         else
         {
-            for(int i = 0; i < 8; i++)
+            for(int i = 0; i < 7; i++)
             {
-                for(int j = 0; j < 8; j++)
+                for(int j = 0; j < 7; j++)
                 {
-                    if(tabuleiro.campo[i][j].getPeça().getIdentidade() == 5 && tabuleiro.campo[i][j].getPeça().isBranca() == false)
+                    if(tabuleiro.campo[i][j].getPeça() != null &&(tabuleiro.campo[i][j].getPeça().getIdentidade() == 5 && tabuleiro.campo[i][j].getPeça().isBranca() == false))
                     {
                         reipreto = tabuleiro.campo[i][j];
-                        for(int p = 0; p < 8; p++)
+                        for(int p = 0; p < 7; p++)
                         {
-                            for(int q = 0; q < 8; q++)
+                            for(int q = 0; q < 7; q++)
                             {
-                                if(tabuleiro.campo[p][q].getPeça().canMove(tabuleiro, tabuleiro.campo[p][q], reipreto) == true)
+                                if(tabuleiro.campo[p][q].getPeça()!=null && tabuleiro.campo[p][q].getPeça().canMove(tabuleiro, tabuleiro.campo[p][q], reipreto) == true)
                                 {
                                     return true;
                                 }
@@ -59,13 +59,13 @@ public class Xeque {
     {
     	if(branco)
     	{
-	    	for(int i = 0; i < 8; i++)
+	    	for(int i = 0; i < 7; i++)
 	    	{
-	    		for(int j = 0; j < 8; j++)
+	    		for(int j = 0; j < 7; j++)
 	    		{
-	    			for(int p = 0; p < 8; p++)
+	    			for(int p = 0; p < 7; p++)
 	    			{
-	    				for(int q = 0; q < 8; q++)
+	    				for(int q = 0; q < 7; q++)
 	    				{
 	    					if(tabuleiro.campo[i][j].getPeça().isBranca())
 	    						if(tabuleiro.campo[i][j].getPeça().canMove(tabuleiro, tabuleiro.campo[i][j], tabuleiro.campo[p][q]))
@@ -77,15 +77,15 @@ public class Xeque {
     	}
     	else
     	{
-	    	for(int i = 0; i < 8; i++)
+	    	for(int i = 0; i < 7; i++)
 	    	{
-	    		for(int j = 0; j < 8; j++)
+	    		for(int j = 0; j < 7; j++)
 	    		{
-	    			for(int p = 0; p < 8; p++)
+	    			for(int p = 0; p < 7; p++)
 	    			{
-	    				for(int q = 0; q < 8; q++)
+	    				for(int q = 0; q < 7; q++)
 	    				{
-	    					if(!tabuleiro.campo[i][j].getPeça().isBranca())
+	    					if(tabuleiro.campo[i][j].getPeça() != null && !tabuleiro.campo[i][j].getPeça().isBranca())
 	    						if(tabuleiro.campo[i][j].getPeça().canMove(tabuleiro, tabuleiro.campo[i][j], tabuleiro.campo[p][q]))
 	    							return false;
 	    				}	

@@ -10,7 +10,7 @@ public class Cavalo extends Peça{
 	public boolean canMove(Tabuleiro tabuleiro,Quadrado inicio,Quadrado fim) {
 		
 		//proibe de mover a peça para um lugar que tenha uma peça de mesma cor
-		if(fim.getPeça().isBranca() == this.isBranca()) {
+		if(fim.getPeça() != null && fim.getPeça().isBranca() == this.isBranca()) {
 			return false;
 		}
 		
@@ -21,6 +21,7 @@ public class Cavalo extends Peça{
 			if(x * y != 2) {
 				return false;
 			}
+			/*
 			fCavalo = tabuleiro.campo[fim.getX()][fim.getY()];
 			Tabuleiro tfCavalo = new Tabuleiro();
 			tfCavalo = tabuleiro;
@@ -30,6 +31,7 @@ public class Cavalo extends Peça{
 			if(xeqBispo.xequedetect(tfCavalo, this.isBranca())){
 				return false;
 			}
+			*/
 		return true;
 	}
 
