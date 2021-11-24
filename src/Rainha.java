@@ -16,7 +16,7 @@ public class Rainha extends Peça {
 		int y = Math.abs(fim.getY() - inicio.getY() );
 		
 		//proibição do movimento exclusivo do cavalo
-			if(x * y != 2) {
+			if(x * y == 2) {
 				return false;
 			}
 		
@@ -92,25 +92,25 @@ public class Rainha extends Peça {
 			
 			
 			if(fim.getY() > inicio.getY()) {
-				direção = "sul";
+				direção = "leste";
 			}
 			
 			if(fim.getY() < inicio.getY()) {
-				direção = "norte";
+				direção = "oeste";
 			}
 			
 			if(fim.getX() > inicio.getX()) {
-				direção ="leste";
+				direção ="norte";
 			}
 			
 			if(fim.getX() < inicio.getX()) {
-				direção = "oeste";
+				direção = "sul";
 			}
 
 			if(direção.equals("sul")) {
 				int movimento = Math.abs(fim.getY() - inicio.getY());
 				for(int i=1; i<movimento ;i++) {
-					if(tabuleiro.campo[inicio.getX()][inicio.getY()+i].getPeça()!=null) {
+					if(tabuleiro.campo[inicio.getX()+i][inicio.getY()].getPeça()!=null) {
 						return false;
 					}				
 				}
@@ -119,7 +119,7 @@ public class Rainha extends Peça {
 			if(direção.equals("norte")) {
 				int movimento = Math.abs(fim.getY() - inicio.getY());
 				for(int i=1; i<movimento ;i++) {
-					if(tabuleiro.campo[inicio.getX()][inicio.getY()-i].getPeça()!=null) {
+					if(tabuleiro.campo[inicio.getX()-i][inicio.getY()].getPeça()!=null) {
 						return false;
 					}				
 				}
@@ -128,7 +128,7 @@ public class Rainha extends Peça {
 			if(direção.equals("leste")) {
 				int movimento = Math.abs(fim.getX() - inicio.getX());
 				for(int i=1; i<movimento ;i++) {
-					if(tabuleiro.campo[inicio.getX()+i][inicio.getY()].getPeça()!=null) {
+					if(tabuleiro.campo[inicio.getX()][inicio.getY()+i].getPeça()!=null) {
 						return false;
 					}				
 				}
@@ -136,12 +136,12 @@ public class Rainha extends Peça {
 			if(direção.equals("oeste")) {
 				int movimento = Math.abs(fim.getX() - inicio.getX());
 				for(int i=1; i<movimento ;i++) {
-					if(tabuleiro.campo[inicio.getX()-i][inicio.getY()].getPeça()!=null) {
+					if(tabuleiro.campo[inicio.getX()][inicio.getY()-i].getPeça()!=null) {
 						return false;
 					}				
 				}
 			}
-			
+			/*
 			fRainha = tabuleiro.campo[fim.getX()][fim.getY()];
 			Tabuleiro tfRainha = new Tabuleiro();
 			tfRainha = tabuleiro;
@@ -151,6 +151,7 @@ public class Rainha extends Peça {
 			if(xeqBispo.xequedetect(tfRainha, this.isBranca())){
 				return false;
 			}
+			*/
 		return true;
 	}
 

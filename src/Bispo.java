@@ -11,37 +11,38 @@ public class Bispo extends Peça{
 	public boolean canMove(Tabuleiro tabuleiro,Quadrado inicio,Quadrado fim) {
 		
 		//proibe de mover a peça para um lugar que tenha uma peça de mesma cor
-		if(fim.getPeça().isBranca() == this.isBranca()) {
+		if(fim.getPeça() != null && fim.getPeça().isBranca() == this.isBranca()) {
 			return false;
 		}
 		
-		if(fim.getX() == inicio.getX() || fim.getY() == inicio.getY()) {
+		if(fim.getX() +1  == inicio.getX()  && fim.getY() != inicio.getY()) {
 			return false;
 		}
-		
+		System.out.println("aaa");
 		
 		String direção = "";
 		//SE
 		if(fim.getY() > inicio.getY() && fim.getX() > inicio.getX()) {
-			direção = "sudeste";
+			direção = "nordeste";
 		}
 		
 			
 		//SO
 		if(fim.getY() > inicio.getY() && fim.getX() < inicio.getX()) {
-			direção = "sudoeste";
+			direção = "sudeste";
 		}
 			
 		//NE
 		if(fim.getY() < inicio.getY() && fim.getX() > inicio.getX()) {
-			direção = "nordeste";
+			direção = "noroeste";
 		}
 			
 		//NO
 		if(fim.getY() < inicio.getY() && fim.getX() < inicio.getX()) {
-			direção = "noroeste";
+			direção = "sudoeste";
 		}
 		
+		//Processo de verificação de peças no caminho do movimento desejado
 		if(direção.equals("sudeste")) {
 			int x = Math.abs(fim.getX() - inicio.getX());
 			
@@ -52,19 +53,8 @@ public class Bispo extends Peça{
 			}
 			
 		}
-		//Processo de verificação de peças no caminho do movimento desejado
-		if(direção.equals("sudoeste")) {
-			int x = Math.abs(fim.getX() - inicio.getX());
-			
-			for(int i=1; i<x ; i++) {
-					if(tabuleiro.campo[inicio.getX()-i][inicio.getY()+i].getPeça() !=null) {
-						return false;
-					}
-			}
-			
-		}
 		
-		if(direção.equals("nordeste")) {
+		if(direção.equals("sudoeste")) {
 			int x = Math.abs(fim.getX() - inicio.getX());
 			
 			for(int i=1; i<x ; i++) {
@@ -75,16 +65,28 @@ public class Bispo extends Peça{
 			
 		}
 		
-		if(direção.equals("noroeste")) {
+		if(direção.equals("nordeste")) {
 			int x = Math.abs(fim.getX() - inicio.getX());
 			
 			for(int i=1; i<x ; i++) {
-					if(tabuleiro.campo[inicio.getX()-i][inicio.getY()-i].getPeça() !=null) {
+					if(tabuleiro.campo[inicio.getX()-i][inicio.getY()+i].getPeça() !=null) {
 						return false;
 					}
 			}
 			
 		}
+		
+		if(direção.equals("noroeste")) {
+			int x = Math.abs(fim.getX() - inicio.getX());
+			System.out.println(" "+ x);
+			for(int i=1; i<x ; i++) {
+					if(inicio.getX() - i > 0 && (tabuleiro.campo[inicio.getX()-i][inicio.getY()-i].getPeça() !=null)) {
+						return false;
+					}
+			}
+			
+		}
+		/*
 		fBispo = tabuleiro.campo[fim.getX()][fim.getY()];
 		Tabuleiro tfBispo = new Tabuleiro();
 		tfBispo = tabuleiro;
@@ -94,7 +96,7 @@ public class Bispo extends Peça{
 		if(xeqBispo.xequedetect(tfBispo, this.isBranca())){
 			return false;
 		}
-
+		 */
 		return true;
 	}
 
