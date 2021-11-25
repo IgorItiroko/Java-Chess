@@ -29,15 +29,15 @@ public class Torre extends Peça{
 		}
 		
 		if(fim.getX() > inicio.getX()) {
-			direção ="norte";
+			direção ="sul";
 		}
 		
 		if(fim.getX() < inicio.getX()) {
-			direção = "sul";
+			direção = "norte";
 		}
 
 		if(direção.equals("sul")) {
-			int movimento = Math.abs(fim.getY() - inicio.getY());
+			int movimento = Math.abs(fim.getX() - inicio.getX());
 			for(int i=1; i<movimento ;i++) {
 				if(tabuleiro.campo[inicio.getX()+i][inicio.getY()].getPeça()!=null) {
 					return false;
@@ -46,7 +46,7 @@ public class Torre extends Peça{
 		}
 		
 		if(direção.equals("norte")) {
-			int movimento = Math.abs(fim.getY() - inicio.getY());
+			int movimento = Math.abs(fim.getX() - inicio.getX());
 			for(int i=1; i<movimento ;i++) {
 				if(tabuleiro.campo[inicio.getX()-i][inicio.getY()].getPeça()!=null) {
 					return false;
@@ -55,7 +55,7 @@ public class Torre extends Peça{
 		}
 		
 		if(direção.equals("leste")) {
-			int movimento = Math.abs(fim.getX() - inicio.getX());
+			int movimento = Math.abs(fim.getY() - inicio.getY());
 			for(int i=1; i<movimento ;i++) {
 				if(tabuleiro.campo[inicio.getX()][inicio.getY()+i].getPeça()!=null) {
 					return false;
@@ -64,7 +64,7 @@ public class Torre extends Peça{
 		}
 		
 		if(direção.equals("oeste")) {
-			int movimento = Math.abs(fim.getX() - inicio.getX());
+			int movimento = Math.abs(fim.getY() - inicio.getY());
 			for(int i=1; i<movimento ;i++) {
 				if(tabuleiro.campo[inicio.getX()][inicio.getY()-i].getPeça()!=null) {
 					return false;
