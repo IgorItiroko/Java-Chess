@@ -67,7 +67,7 @@ public class Xeque {
 	    			{
 	    				for(int q = 0; q < 7; q++)
 	    				{
-	    					if(tabuleiro.campo[i][j].getPeça().isBranca())
+	    					if(tabuleiro.campo[i][j].getPeça() != null && tabuleiro.campo[i][j].getPeça().isBranca())
 	    						if(tabuleiro.campo[i][j].getPeça().canMove(tabuleiro, tabuleiro.campo[i][j], tabuleiro.campo[p][q]))
 	    							return false;
 	    				}	

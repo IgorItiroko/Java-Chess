@@ -63,13 +63,18 @@ public class Jogo{
 		move.getFim().setPeça(move.getIni().getPeça());
 		move.getIni().setPeça(null);
 		
-		if(xeque.xequedetect(tabuleiro, j.isLadobranco()) && j.isLadobranco())
+		if(xeque.xequedetect(tabuleiro, j.isLadobranco()))
         {
             move.getIni().setPeça(move.getIni().getPeça());
             move.getFim().setPeça(null);
             return false;
         }
-
+		
+		if(xeque.xequedetect(tabuleiro, j.isLadobranco() && j.isLadobranco()))
+        {
+			System.out.println("Jogador do lado branco em xeque!");
+        }
+		
         if(xeque.xequedetect(tabuleiro, j.isLadobranco()) && !j.isLadobranco())
         {
             System.out.println("Jogador do lado preto em xeque!");
@@ -83,26 +88,7 @@ public class Jogo{
         {
             System.out.println("Jogador do lado branco ganhou!");
         }
-		/*
-		if(xeque.xequedetect(tabuleiro, j.isLadobranco() && j.isLadobranco()))
-		{
-			System.out.println("Jogador do lado branco em xeque!");
-		}
-		
-		if(xeque.xequedetect(tabuleiro, j.isLadobranco() && !j.isLadobranco()))
-		{
-			System.out.println("Jogador do lado preto em xeque!");
-		}
-		
-		if(xeque.xequematedetect(tabuleiro, j.isLadobranco() && j.isLadobranco()))
-		{
-			System.out.println("Jogador do lado preto ganhou!");
-		}
-		if(xeque.xequematedetect(tabuleiro, j.isLadobranco() && !j.isLadobranco()))
-		{
-			System.out.println("Jogador do lado branco ganhou!");
-		}
-		*/
+        
 		if(this.turno == jogadores[0])
 		{
 			this.turno = jogadores[1];

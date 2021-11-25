@@ -51,6 +51,25 @@ public class Testebásico {
 		
 		print();
 
+		System.out.println("\n");
+		try {
+			System.out.println("\n"+jogo.construtorJogada(jogo.turno, 2,4, 3,4, xeque));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		print();
+		
+		System.out.println("\n");
+		try {
+			System.out.println("\n"+jogo.construtorJogada(jogo.turno, 4,3, 3,4, xeque));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		print();
 	}	
 	
 	public static void print() {
