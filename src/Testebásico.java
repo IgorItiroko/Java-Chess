@@ -11,39 +11,22 @@ public class Testebásico {
 		jogo = new Jogo();
 		jogo.iniciar(jogadores[0],jogadores[1]);
 		
-		System.out.println("\n");
 		try {
-			System.out.println("\n"+jogo.construtorJogada(jogo.turno, 1,4, 2,4, xeque));
+			System.out.println("\n"+jogo.construtorJogada(jogo.turno, 1,0, 3,0, xeque));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		print();
-	
-		System.out.println("\n");
 		try {
-			System.out.println("\n"+jogo.construtorJogada(jogo.turno, 6,3, 5,3, xeque));
+			System.out.println("\n"+jogo.construtorJogada(jogo.turno, 3,0, 4,0, xeque));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		print();
-		
-		System.out.println("\n");
 		try {
-			System.out.println("\n"+jogo.construtorJogada(jogo.turno, 0,5, 5,2,xeque));
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		print();
-		
-		System.out.println("\n");
-		try {
-			System.out.println("\n"+jogo.construtorJogada(jogo.turno, 5,3, 4,3, xeque));
+			System.out.println("\n"+jogo.construtorJogada(jogo.turno, 4,0, 5,1, xeque));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -51,26 +34,9 @@ public class Testebásico {
 		
 		print();
 
-		System.out.println("\n");
-		try {
-			System.out.println("\n"+jogo.construtorJogada(jogo.turno, 2,4, 3,4, xeque));
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
-		print();
-		
-		System.out.println("\n");
-		try {
-			System.out.println("\n"+jogo.construtorJogada(jogo.turno, 4,3, 3,4, xeque));
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		print();
-	}	
+
+	}
 	
 	public static void print() {
 		for(int i = 0; i < 8; i++)

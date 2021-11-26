@@ -63,7 +63,7 @@ public class Jogo{
 		move.getFim().setPeça(move.getIni().getPeça());
 		move.getIni().setPeça(null);
 		
-		if(xeque.xequedetect(tabuleiro, j.isLadobranco()))
+		if(Xeque.xequedetect(tabuleiro, j.isLadobranco()))
         {
             move.getIni().setPeça(move.getIni().getPeça());
             move.getFim().setPeça(null);
@@ -88,7 +88,7 @@ public class Jogo{
         {
             System.out.println("Jogador do lado branco ganhou!");
         }
-        
+        /*
 		if(this.turno == jogadores[0])
 		{
 			this.turno = jogadores[1];
@@ -96,6 +96,7 @@ public class Jogo{
 		else {
 			this.turno = jogadores[0];
 		}
+		*/
 		return true;
 
 		

@@ -21,20 +21,76 @@ public class Peão extends Peça{
 		
 		int x = Math.abs(fim.getX() - inicio.getX());
 		
+		
 		//proibe de mover a peça mais do que 2 caso não seja o primeiro movimento
 		if( getPrimeiroMovimento() == true) {
 			if(x >2)
 				return false;
+			if(fim.getY() != inicio.getY()) {
+				return false;
+			}
 		}
 		
 		if(getPrimeiroMovimento() == false && x>1) {
 			return false;
 		}
-				
-		//proibe de mover a peça na diagonal caso não haja nenhuma peça do oponente
-		if(tabuleiro.campo[inicio.getX() + 1][inicio.getY() + 1].getPeça() != null && tabuleiro.campo[inicio.getX() + 1][inicio.getY() + 1].getPeça().isBranca() != this.isBranca() ) {
+		
+		if(fim.getPeça() != null && fim.getPeça().isBranca() == this.isBranca()) {
 			return false;
 		}
+		
+	
+		if(this.isBranca() && fim.getX() < inicio.getX()){
+			return false;
+		}
+				
+			//Arrumar Peão -> separar entre brancos e pretos e fazer as verificações
+		
+		if((inicio.getY() +1 < 7 && inicio.getY() -1 > 0 ) && (fim.getX() > inicio.getX()) && this.isBranca()) {
+			
+			if(tabuleiro.campo[inicio.getX() + 1][inicio.getY() + 1].getPeça() != null ){
+				return false;
+			}
+			if(inicio.getY()+1 > 0) {
+				if(tabuleiro.campo[inicio.getX() + 1][inicio.getY() + -1].getPeça() != null){
+					return false;
+				}
+			}
+		}
+		
+		
+		
+		if((inicio.getY() +1 < 7 || inicio.getY() -1 > 0 ) && (fim.getX() < inicio.getX()) && !this.isBranca()) {
+			
+			if(tabuleiro.campo[inicio.getX() - 1][inicio.getY() + 1].getPeça() == null){
+				return false;
+			}
+			if(inicio.getY()+1 > 0) {
+				if(tabuleiro.campo[inicio.getX() - 1][inicio.getY() + -1].getPeça() == null){
+					return false;
+				}
+			}
+		}
+		
+		//proibe de mover a peça na diagonal caso não haja nenhuma peça do oponente - Bordas
+		
+		if(inicio.getY() +1 > 7 && (fim.getX() > inicio.getX()) && this.isBranca()){
+			
+			if(tabuleiro.campo[inicio.getX() + 1][inicio.getY()-1].getPeça() != null && tabuleiro.campo[inicio.getX() + 1][inicio.getY() + 1].getPeça().isBranca() != this.isBranca()){
+				return false;
+			}
+		}
+		if(inicio.getY() +1 > 7 && (fim.getX() < inicio.getX()) && !this.isBranca()){
+			
+			if(tabuleiro.campo[inicio.getX() - 1][inicio.getY() -1].getPeça() != null && tabuleiro.campo[inicio.getX() + 1][inicio.getY() + 1].getPeça().isBranca() != this.isBranca()){
+				return false;
+			}
+		}
+		
+		
+		
+			
+		
 				
 		//proibe de mover a peça para um lugar que tenha uma peça de mesma cor
 		if(fim.getPeça() != null && fim.getPeça().isBranca() == this.isBranca()) {
@@ -46,11 +102,11 @@ public class Peão extends Peça{
 		}
 		
 		String direção = "";
-		if(fim.getY() > inicio.getY()) {
+		if(fim.getX() > inicio.getX()) {
 			direção = "sul";
 		}
 		
-		if(fim.getY() < inicio.getY()) {
+		if(fim.getX() < inicio.getX()) {
 			direção = "norte";
 		}
 		
@@ -67,16 +123,7 @@ public class Peão extends Peça{
 				}				
 			}
 		
-		/*fPeão = tabuleiro.campo[fim.getX()][fim.getY()];
-		Tabuleiro tfPeão = new Tabuleiro();
-		tfPeão = tabuleiro;
-		tfPeão.campo[fim.getX()][fim.getY()] = fPeão;
-		
-		Xeque xeqBispo = new Xeque();
-		if(xeqBispo.xequedetect(tfPeão, this.isBranca())){
-			return false;
-		}
-		*/
+
 		setPrimeiroMovimento(false);
 		return true;
 	}

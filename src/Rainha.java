@@ -9,9 +9,10 @@ public class Rainha extends Peça {
 	public boolean canMove(Tabuleiro tabuleiro,Quadrado inicio,Quadrado fim) {
 		
 		//proibe de mover a peça para um lugar que tenha uma peça de mesma cor
-		if(fim.getPeça().isBranca() == this.isBranca()) {
+		if(fim.getPeça() != null && fim.getPeça().isBranca() == this.isBranca()) {
 			return false;
 		}
+		
 		int x = Math.abs(fim.getX() - inicio.getX());
 		int y = Math.abs(fim.getY() - inicio.getY() );
 		
@@ -19,77 +20,85 @@ public class Rainha extends Peça {
 			if(x * y == 2) {
 				return false;
 			}
-		
+			
+			String mov = "";
+			if(fim.getX() == inicio.getX() || fim.getY() == inicio.getY()) {
+				mov = "torre";
+			}
+			
+			if(x == y) {
+				mov = "bispo";
+			}
+			
+			System.out.println(mov);
 			//Movimentos estilo Bispo
 			
 			String direção = "";
+			int key=0;
+			
 			//SE
-			if(fim.getY() > inicio.getY() && fim.getX() > inicio.getX()) {
-				direção = "sudeste";
-			}
+			if(mov.equals("bispo")) {
+				key=1;
 			
-				
-			//SO
-			if(fim.getY() > inicio.getY() && fim.getX() < inicio.getX()) {
-				direção = "sudoeste";
-			}
-				
-			//NE
-			if(fim.getY() < inicio.getY() && fim.getX() > inicio.getX()) {
-				direção = "nordeste";
-			}
-				
-			//NO
-			if(fim.getY() < inicio.getY() && fim.getX() < inicio.getX()) {
-				direção = "noroeste";
-			}
-			
-			if(direção.equals("sudeste")) {
-				//int x = Math.abs(fim.getX() - inicio.getX());
-				
-				for(int i=1; i<x ; i++) {
-						if(tabuleiro.campo[inicio.getX()+i][inicio.getY()+i].getPeça() !=null) {
-							return false;
-						}
+				//SE
+				if(fim.getY() > inicio.getY() && fim.getX() > inicio.getX()) {
+					direção = "sudeste";
 				}
 				
-			}
-			//Processo de verificação de peças no caminho do movimento desejado
-			if(direção.equals("sudoeste")) {
-				//int x = Math.abs(fim.getX() - inicio.getX());
-				
-				for(int i=1; i<x ; i++) {
-						if(tabuleiro.campo[inicio.getX()-i][inicio.getY()+i].getPeça() !=null) {
-							return false;
-						}
+					
+				//NE
+				if(fim.getY() > inicio.getY() && fim.getX() < inicio.getX()) {
+					direção = "nordeste";
+				}
+					
+				//NO
+				if(fim.getY() < inicio.getY() && fim.getX() > inicio.getX()) {
+					direção = "noroeste";
+				}
+					
+				//SO
+				if(fim.getY() < inicio.getY() && fim.getX() < inicio.getX()) {
+					direção = "sudoeste";
 				}
 				
-			}
-			
-			if(direção.equals("nordeste")) {
-				//int x = Math.abs(fim.getX() - inicio.getX());
+				//Processo de verificação de peças no caminho do movimento desejado
 				
-				for(int i=1; i<x ; i++) {
-						if(tabuleiro.campo[inicio.getX()+i][inicio.getY()-i].getPeça() !=null) {
-							return false;
-						}
+				if(direção.equals("sudeste")) {				
+					for(int i=1; i<x ; i++) {
+							if(tabuleiro.campo[inicio.getX()+i][inicio.getY()+i].getPeça() !=null) {
+								return false;
+							}
+					}
 				}
-				
-			}
-			
-			if(direção.equals("noroeste")) {
-				//int x = Math.abs(fim.getX() - inicio.getX());
-				
-				for(int i=1; i<x ; i++) {
-						if(tabuleiro.campo[inicio.getX()-i][inicio.getY()-i].getPeça() !=null) {
-							return false;
-						}
+					
+				if(direção.equals("nordeste")) {				
+					for(int i=1; i<x ; i++) {
+							if(tabuleiro.campo[inicio.getX()-i][inicio.getY()+i].getPeça() !=null) {
+								return false;
+							}
+					}
 				}
-				
-			}
+				if(direção.equals("noroeste")) {				
+					for(int i=1; i<x ; i++) {
+							if(tabuleiro.campo[inicio.getX()+i][inicio.getY()-i].getPeça() !=null) {
+								return false;
+							}
+					}
+				}
+				if(direção.equals("sudoeste")) {				
+					for(int i=1; i<x ; i++) {
+							if(tabuleiro.campo[inicio.getX()-i][inicio.getY()-i].getPeça() !=null) {
+								return false;
+							}
+					}
+				}
+		}
 			
 			//Movimentos estilo Torre
 			
+			
+			if(mov.equals("torre")) {
+				key=1;
 			
 			if(fim.getY() > inicio.getY()) {
 				direção = "leste";
@@ -100,15 +109,15 @@ public class Rainha extends Peça {
 			}
 			
 			if(fim.getX() > inicio.getX()) {
-				direção ="norte";
+				direção ="sul";
 			}
 			
 			if(fim.getX() < inicio.getX()) {
-				direção = "sul";
+				direção = "norte";
 			}
 
 			if(direção.equals("sul")) {
-				int movimento = Math.abs(fim.getY() - inicio.getY());
+				int movimento = Math.abs(fim.getX() - inicio.getX());
 				for(int i=1; i<movimento ;i++) {
 					if(tabuleiro.campo[inicio.getX()+i][inicio.getY()].getPeça()!=null) {
 						return false;
@@ -117,7 +126,7 @@ public class Rainha extends Peça {
 			}
 			
 			if(direção.equals("norte")) {
-				int movimento = Math.abs(fim.getY() - inicio.getY());
+				int movimento = Math.abs(fim.getX() - inicio.getX());
 				for(int i=1; i<movimento ;i++) {
 					if(tabuleiro.campo[inicio.getX()-i][inicio.getY()].getPeça()!=null) {
 						return false;
@@ -126,33 +135,29 @@ public class Rainha extends Peça {
 			}
 			
 			if(direção.equals("leste")) {
-				int movimento = Math.abs(fim.getX() - inicio.getX());
+				int movimento = Math.abs(fim.getY() - inicio.getY());
 				for(int i=1; i<movimento ;i++) {
 					if(tabuleiro.campo[inicio.getX()][inicio.getY()+i].getPeça()!=null) {
 						return false;
 					}				
 				}
 			}
+			
 			if(direção.equals("oeste")) {
-				int movimento = Math.abs(fim.getX() - inicio.getX());
+				int movimento = Math.abs(fim.getY() - inicio.getY());
 				for(int i=1; i<movimento ;i++) {
 					if(tabuleiro.campo[inicio.getX()][inicio.getY()-i].getPeça()!=null) {
 						return false;
 					}				
 				}
 			}
-			/*
-			fRainha = tabuleiro.campo[fim.getX()][fim.getY()];
-			Tabuleiro tfRainha = new Tabuleiro();
-			tfRainha = tabuleiro;
-			tfRainha.campo[fim.getX()][fim.getY()] = fRainha;
-			
-			Xeque xeqBispo = new Xeque();
-			if(xeqBispo.xequedetect(tfRainha, this.isBranca())){
+		}
+			if(key == 0) {
 				return false;
 			}
-			*/
+			
 		return true;
 	}
 
 }
+
