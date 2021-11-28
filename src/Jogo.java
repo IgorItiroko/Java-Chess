@@ -70,6 +70,7 @@ public class Jogo{
             return false;
         }
 		
+		/*
 		if(xeque.xequedetect(tabuleiro, j.isLadobranco() && j.isLadobranco()))
         {
 			System.out.println("Jogador do lado branco em xeque!");
@@ -89,7 +90,8 @@ public class Jogo{
             System.out.println("Jogador do lado branco ganhou!");
         }
         
-        
+        */
+		
 		if(this.turno == jogadores[0])
 		{
 			this.turno = jogadores[1];
