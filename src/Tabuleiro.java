@@ -19,9 +19,9 @@ public class Tabuleiro extends JComponent {
 	public void resetTabuleiro()
 	{
 		/// Peças brancas
-		campo[0][0] = new Quadrado(0, 0, null);
-		campo[0][1] = new Quadrado(0, 1, null);
-		campo[0][2] = new Quadrado(0, 2, null);
+		campo[0][0] = new Quadrado(0, 0, new Torre(true,2));
+		campo[0][1] = new Quadrado(0, 1, new Rei(true,5));
+		campo[0][2] = new Quadrado(0, 2, new Torre(true,2));
 		campo[0][3] = new Quadrado(0, 3, null);
 		campo[0][4] = new Quadrado(0, 4, null);
 		campo[0][5] = new Quadrado(0, 5, null);
@@ -37,8 +37,8 @@ public class Tabuleiro extends JComponent {
 		campo[1][7] = new Quadrado(1, 7, null);
 		
 		/// Peças Pretas
-		campo[7][0] = new Quadrado(7, 0, null);
-		campo[7][1] = new Quadrado(7, 1, null);
+		campo[7][0] = new Quadrado(7, 0, new Torre(false,2));
+		campo[7][1] = new Quadrado(7, 1, new Rainha(false,6));
 		campo[7][2] = new Quadrado(7, 2, null);
 		campo[7][3] = new Quadrado(7, 3, null);
 		campo[7][4] = new Quadrado(7, 4, null);

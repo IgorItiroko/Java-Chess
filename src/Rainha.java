@@ -30,7 +30,6 @@ public class Rainha extends Peça {
 				mov = "bispo";
 			}
 			
-			System.out.println(mov);
 			//Movimentos estilo Bispo
 			
 			String direção = "";

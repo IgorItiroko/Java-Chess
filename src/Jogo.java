@@ -23,15 +23,114 @@ public class Jogo{
 		}
 	}
 	
-	public boolean construtorJogada(Jogador j1, int Xinicial, int Yinicial, int Xfinal, int Yfinal, Xeque xeque) throws Exception
+    public static boolean xequedetect(Tabuleiro tabuleiro, boolean branco)
+    {
+        if(branco == true)
+        {
+            for(int i = 0; i < 8; i++)
+            {
+                for(int j = 0; j < 8; j++)
+                {
+                    if(tabuleiro.campo[i][j].getPeça() != null && (tabuleiro.campo[i][j].getPeça().getIdentidade() == 5 && tabuleiro.campo[i][j].getPeça().isBranca() == true ) )
+                    {
+                        for(int p = 0; p < 8; p++)
+                        {
+                            for(int q = 0; q < 8; q++)
+                            {
+                            	if(tabuleiro.campo[p][q].getPeça() != null)
+                                    if(!tabuleiro.campo[p][q].getPeça().isBranca())
+                                    {	
+                                        if(tabuleiro.campo[p][q].getPeça().canMove(tabuleiro, tabuleiro.campo[p][q], tabuleiro.campo[i][j]))
+                                            return true;
+                                    }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        else
+        {
+            for(int i = 0; i < 8; i++)
+            {
+                for(int j = 0; j < 8; j++)
+                {
+                    if(tabuleiro.campo[i][j].getPeça() != null && (tabuleiro.campo[i][j].getPeça().getIdentidade() == 5 && !tabuleiro.campo[i][j].getPeça().isBranca() == true ) )
+                    {
+                        for(int p = 0; p < 8; p++)
+                        {
+                            for(int q = 0; q < 8; q++)
+                            {
+                            	if(tabuleiro.campo[p][q].getPeça() != null)
+                                    if(tabuleiro.campo[p][q].getPeça().isBranca())
+                                    {	
+                                        if(tabuleiro.campo[p][q].getPeça().canMove(tabuleiro, tabuleiro.campo[p][q], tabuleiro.campo[i][j]))
+                                            return true;
+                                    }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
+    
+    public boolean xequematedetect(Tabuleiro tabuleiro, boolean branco)
+    {
+        if(branco)
+        {
+            for(int i = 0; i < 8; i++)
+            {
+                for(int j = 0; j < 8; j++)
+                {
+                	if(tabuleiro.campo[i][j].getPeça() != null && !tabuleiro.campo[i][j].getPeça().isBranca())
+                	{
+                		for(int p = 0; p < 8; p++)
+                		{
+                			for(int q = 0; q < 8; q++)
+                			{
+                				if(tabuleiro.campo[i][j].getPeça().canMove(tabuleiro, tabuleiro.campo[i][j], tabuleiro.campo[p][q]));
+                			}
+                		}
+                	}
+                    
+                }
+            }
+        }
+        else
+        {
+            for(int i = 0; i < 8; i++)
+            {
+                for(int j = 0; j < 8; j++)
+                {
+                	if(tabuleiro.campo[i][j].getPeça() != null && tabuleiro.campo[i][j].getPeça().isBranca())
+                	{
+                		for(int p = 0; p < 8; p++)
+                		{
+                			for(int q = 0; q < 8; q++)
+                			{
+                				if(tabuleiro.campo[i][j].getPeça().canMove(tabuleiro, tabuleiro.campo[i][j], tabuleiro.campo[p][q]));
+                			}
+                		}
+                	}
+                    
+                }
+            }
+        }    
+        return true;
+    }   
+	
+	public boolean construtorJogada(Jogador j1, int Xinicial, int Yinicial, int Xfinal, int Yfinal) throws Exception
 	{
 		Quadrado iniPos = tabuleiro.validade(Xinicial, Yinicial);
 		Quadrado fimPos = tabuleiro.validade(Xfinal, Yfinal);
 		Mov move = new Mov(j1,iniPos,fimPos);
-		return this.Jogada(move,j1,xeque);
+		return this.Jogada(move,j1);
 	}
 	
-	public boolean Jogada(Mov move, Jogador j, Xeque xeque)
+	public boolean Jogada(Mov move, Jogador j)
 	{
 		Peça escolhida = move.getIni().getPeça();
 		if (escolhida == null)
@@ -63,9 +162,9 @@ public class Jogo{
 		move.getFim().setPeça(move.getIni().getPeça());
 		move.getIni().setPeça(null);
 		
-		if(Xeque.xequedetect(tabuleiro, j.isLadobranco()))
+		if (xequedetect(tabuleiro, j.isLadobranco()))
         {
-            move.getIni().setPeça(move.getIni().getPeça());
+            move.getIni().setPeça(move.getFim().getPeça());
             move.getFim().setPeça(null);
             return false;
         }
