@@ -36,7 +36,6 @@ public class Rainha extends Peça {
 			String direção = "";
 			int key=0;
 			
-			//SE
 			if(mov.equals("bispo")) {
 				key=1;
 			

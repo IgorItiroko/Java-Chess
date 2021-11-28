@@ -1,10 +1,19 @@
 
 public class Torre extends Peça{
 	public int identidade;
+	public boolean primeiroMovimento;
 	public Torre (boolean branca, int identidade) {
 		 super(branca,identidade);
+		 primeiroMovimento = true;
 	}
-	public Quadrado fTorre;
+	
+	public void setPrimeiroMovimento(boolean primeiroMovimento) {
+		this.primeiroMovimento = primeiroMovimento;
+	}
+	
+	public boolean getPrimeiroMovimento() {
+		return primeiroMovimento;
+	}
 	
 	public boolean canMove(Tabuleiro tabuleiro,Quadrado inicio,Quadrado fim) {
 		
@@ -83,6 +92,7 @@ public class Torre extends Peça{
 			return false;
 		}
 		*/
+		setPrimeiroMovimento(false);
 		return true;
 	}
 }

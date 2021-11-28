@@ -12,21 +12,14 @@ public class Testebásico {
 		jogo.iniciar(jogadores[0],jogadores[1]);
 		
 		try {
-			System.out.println("\n"+jogo.construtorJogada(jogo.turno, 1,0, 3,0, xeque));
+			System.out.println("\n"+jogo.construtorJogada(jogo.turno, 1,0, 2,0, xeque));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		try {
-			System.out.println("\n"+jogo.construtorJogada(jogo.turno, 3,0, 4,0, xeque));
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		try {
-			System.out.println("\n"+jogo.construtorJogada(jogo.turno, 4,0, 5,1, xeque));
+			System.out.println("\n"+jogo.construtorJogada(jogo.turno, 6,0, 0,0, xeque));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -88,7 +88,8 @@ public class Jogo{
         {
             System.out.println("Jogador do lado branco ganhou!");
         }
-        /*
+        
+        
 		if(this.turno == jogadores[0])
 		{
 			this.turno = jogadores[1];
@@ -96,7 +97,7 @@ public class Jogo{
 		else {
 			this.turno = jogadores[0];
 		}
-		*/
+		
 		return true;
 
 		

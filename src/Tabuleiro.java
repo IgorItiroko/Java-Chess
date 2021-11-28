@@ -45,7 +45,7 @@ public class Tabuleiro extends JComponent {
 		campo[7][5] = new Quadrado(7, 5, null);
 		campo[7][6] = new Quadrado(7, 6, null);
 		campo[7][7] = new Quadrado(7, 7, null);
-		campo[6][0] = new Quadrado(6, 0, null);
+		campo[6][0] = new Quadrado(6, 0, new Peão(false,1));
 		campo[6][1] = new Quadrado(6, 1, null);
 		campo[6][2] = new Quadrado(6, 2, null);
 		campo[6][3] = new Quadrado(6, 3, null);

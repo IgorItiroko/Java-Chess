@@ -86,18 +86,6 @@ public class Bispo extends Peça{
 			}
 		}
 			
-		
-		/*
-		fBispo = tabuleiro.campo[fim.getX()][fim.getY()];
-		Tabuleiro tfBispo = new Tabuleiro();
-		tfBispo = tabuleiro;
-		tfBispo.campo[fim.getX()][fim.getY()] = fBispo;
-		
-		Xeque xeqBispo = new Xeque();
-		if(xeqBispo.xequedetect(tfBispo, this.isBranca())){
-			return false;
-		}
-		 */
 		return true;
 	}
 
