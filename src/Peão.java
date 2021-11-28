@@ -26,6 +26,7 @@ public class Peão extends Peça{
 			return false;
 		}
 		
+		
 		//proibe de mover a peça mais do que 2 
 		if( getPrimeiroMovimento() == true) {
 			if(x >2)
@@ -48,11 +49,21 @@ public class Peão extends Peça{
 				return false;
 			}
 			
+			//Proibe as peças brancas de andarem para frente caso haja uma peça no local destino
+			if(fim.getPeça() != null && this.isBranca() && fim.getX() > inicio.getX() && inicio.getX() +1 == fim.getX()) {
+				return false;
+			}
+			
 			
 			//Proibe peças pretas de andarem para o sul
 			if(!this.isBranca() && inicio.getX() < fim.getX()) {
 				return false;
 			}
+			
+			//Proibe as peças pretas de andarem para frente caso haja uma peça no local destino
+			if(fim.getPeça() != null && !this.isBranca() && fim.getX() < inicio.getX() && fim.getX() +1 == inicio.getX()) {
+				return false;
+			} 
 										
 		
 		//proibe de mover a peça na horizontal
