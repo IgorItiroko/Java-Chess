@@ -2,6 +2,7 @@
 public abstract class Peça {
 	private boolean viva = true;
 	private boolean branca = false;
+	public boolean primeiroMovimento = true;
 	public int identidade;
 	
 	
@@ -18,6 +19,12 @@ public abstract class Peça {
 		return this.branca;
 	}
 	
+	public boolean isPrimeiroMovimento() {
+		return primeiroMovimento;
+	}
+	public void setPrimeiroMovimento(boolean primeiroMovimento) {
+		this.primeiroMovimento = primeiroMovimento;
+	}
 	public void setBranca(boolean branca)
 	{
 		this.branca = branca;

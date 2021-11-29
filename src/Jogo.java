@@ -121,7 +121,111 @@ public class Jogo{
         }    
         return true;
     }   
-	
+
+    public boolean isRoque(Tabuleiro tabuleiro, boolean branco, boolean direita) {
+    	if(branco) {
+    		if(direita) {
+    			if(tabuleiro.campo[0][4].getPeça() == null) {
+    				return false;
+    			}
+    			if(tabuleiro.campo[0][0].getPeça() == null) {
+        			return false;
+    			}
+    			if(tabuleiro.campo[0][4].getPeça().getIdentidade() != 5) {
+        			return false;
+    			}
+    			if(tabuleiro.campo[0][0].getPeça().getIdentidade() != 2) {
+        			return false;
+    			}
+    			if(tabuleiro.campo[0][4].getPeça().isPrimeiroMovimento() == false) {
+    				return false;
+    			}
+    			if(tabuleiro.campo[0][0].getPeça().isPrimeiroMovimento() == false) {
+    				return false;
+    			}
+    			
+    			if(tabuleiro.campo[0][0].getPeça().canMove(tabuleiro, tabuleiro.campo[0][0], tabuleiro.campo[0][3]) == false) {
+    				return false;
+    			}
+    		
+    		}
+    		else {
+    			if(tabuleiro.campo[0][4].getPeça() == null) {
+    				return false;
+    			}
+    			if(tabuleiro.campo[0][7].getPeça() == null) {
+        			return false;
+    			}
+    			if(tabuleiro.campo[0][4].getPeça().getIdentidade() != 5) {
+        			return false;
+    			}
+    			if(tabuleiro.campo[0][7].getPeça().getIdentidade() != 2) {
+        			return false;
+    			}
+    			if(tabuleiro.campo[0][4].getPeça().isPrimeiroMovimento() == false) {
+    				return false;
+    			}
+    			if(tabuleiro.campo[0][7].getPeça().isPrimeiroMovimento() == false) {
+    				return false;
+    			}
+    			
+    			if(tabuleiro.campo[0][7].getPeça().canMove(tabuleiro, tabuleiro.campo[0][7], tabuleiro.campo[0][5]) == false) {
+    				return false;
+    			}   			
+    		}
+    	}
+    	else {
+    		if(direita) {
+    			if(tabuleiro.campo[7][4].getPeça() == null) {
+    				return false;
+    			}
+    			if(tabuleiro.campo[7][0].getPeça() == null) {
+        			return false;
+    			}
+    			if(tabuleiro.campo[7][4].getPeça().getIdentidade() != 5) {
+        			return false;
+    			}
+    			if(tabuleiro.campo[7][0].getPeça().getIdentidade() != 2) {
+        			return false;
+    			}
+    			if(tabuleiro.campo[7][4].getPeça().isPrimeiroMovimento() == false) {
+    				return false;
+    			}
+    			if(tabuleiro.campo[7][0].getPeça().isPrimeiroMovimento() == false) {
+    				return false;
+    			}
+    			
+    			if(tabuleiro.campo[7][0].getPeça().canMove(tabuleiro, tabuleiro.campo[7][0], tabuleiro.campo[7][3]) == false) {
+    				return false;
+    			}
+    		}
+    		else {
+    			if(tabuleiro.campo[7][4].getPeça() == null) {
+    				return false;
+    			}
+    			if(tabuleiro.campo[7][7].getPeça() == null) {
+        			return false;
+    			}
+    			if(tabuleiro.campo[7][4].getPeça().getIdentidade() != 5) {
+        			return false;
+    			}
+    			if(tabuleiro.campo[7][7].getPeça().getIdentidade() != 2) {
+        			return false;
+    			}
+    			if(tabuleiro.campo[7][4].getPeça().isPrimeiroMovimento() == false) {
+    				return false;
+    			}
+    			if(tabuleiro.campo[7][7].getPeça().isPrimeiroMovimento() == false) {
+    				return false;
+    			}
+    			
+    			if(tabuleiro.campo[7][7].getPeça().canMove(tabuleiro, tabuleiro.campo[7][7], tabuleiro.campo[7][5]) == false) {
+    				return false;
+    			}	
+    		}	
+    	}
+    	return true;
+    }
 	public boolean construtorJogada(Jogador j1, int Xinicial, int Yinicial, int Xfinal, int Yfinal) throws Exception
 	{
 		Quadrado iniPos = tabuleiro.validade(Xinicial, Yinicial);
@@ -138,11 +242,11 @@ public class Jogo{
 			return false;
 		}
 		
-		if(j != turno)
+		/*if(j != turno)
 		{
 			return false;
 		}
-		
+		*/
 		if(escolhida.isBranca() != j.isLadobranco())
 		{
 			return false;

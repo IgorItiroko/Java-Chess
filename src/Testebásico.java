@@ -10,14 +10,33 @@ public class Testebásico {
 		jogo = new Jogo();
 		jogo.iniciar(jogadores[0],jogadores[1]);
 		
+		print();
+		
+		try {
+			System.out.println("\nMovimento: "+jogo.construtorJogada(jogo.turno, 0,0, 1,0));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			System.out.println("\nMovimento: "+jogo.construtorJogada(jogo.turno, 7,1, 6,2));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		try {
 			System.out.println("\nMovimento: "+jogo.construtorJogada(jogo.turno, 1,0, 2,0));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("Xeque: " + Jogo.xequedetect(jogo.tabuleiro, true));
-		System.out.println("Xequemate: " + jogo.xequematedetect(jogo.tabuleiro, true));
+		try {
+			System.out.println("\nMovimento: "+jogo.construtorJogada(jogo.turno, 6,2, 7,1));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		print();
 
 		

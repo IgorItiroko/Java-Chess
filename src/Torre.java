@@ -80,18 +80,7 @@ public class Torre extends Peça{
 				}				
 			}
 		}
-		
-		/*
-		fTorre = tabuleiro.campo[fim.getX()][fim.getY()];
-		Tabuleiro tfTorre = new Tabuleiro();
-		tfTorre = tabuleiro;
-		tfTorre.campo[fim.getX()][fim.getY()] = fTorre;
-		
-		Xeque xeqBispo = new Xeque();
-		if(xeqBispo.xequedetect(tfTorre, this.isBranca())){
-			return false;
-		}
-		*/
+
 		setPrimeiroMovimento(false);
 		return true;
 	}
