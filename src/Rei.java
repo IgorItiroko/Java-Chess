@@ -31,7 +31,7 @@ public class Rei extends Peça {
 			return false;
 		}
 				
-		if(x*y != 1) {
+		if(x > 1 || y > 1) {
 			return false;
 		}
 	

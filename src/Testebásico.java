@@ -9,15 +9,8 @@ public class Testebásico {
 		jogadores[1] = new Jogador(false);
 		jogo = new Jogo();
 		jogo.iniciar(jogadores[0],jogadores[1]);
-		
-		try {
-			System.out.println("\nMovimento: "+jogo.construtorJogada(jogo.turno, 1,0, 2,0));
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		System.out.println("Xeque: " + Jogo.xequedetect(jogo.tabuleiro, true));
-		System.out.println("Xequemate: " + jogo.xequematedetect(jogo.tabuleiro, true));
+		System.out.println("Xeque: " + Jogo.xequedetect(jogo.tabuleiro, jogo.turno.isLadobranco()));
+		System.out.println("Xequemate:" + jogo.xequematedetect(jogo.tabuleiro, jogo.turno.ladobranco));
 		print();
 
 		
@@ -32,10 +25,10 @@ public class Testebásico {
 			{
 				if(jogo.tabuleiro.campo[i][j].getPeça() == null)
 				{
-					System.out.print("0 ");
+					System.out.print("| 0 |");
 				}
 				else
-					System.out.print(jogo.tabuleiro.campo[i][j].getPeça().getIdentidade() + " ");
+					System.out.print("| " + jogo.tabuleiro.campo[i][j].getPeça().getIdentidade() + " |");
 			}
 		}
 	}
