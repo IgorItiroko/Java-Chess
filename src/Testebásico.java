@@ -9,41 +9,19 @@ public class Testebásico {
 		jogadores[1] = new Jogador(false);
 		jogo = new Jogo();
 		jogo.iniciar(jogadores[0],jogadores[1]);
-		
 		print();
-		
-		try {
-			System.out.println("\nMovimento: "+jogo.construtorJogada(jogo.turno, 0,0, 1,0));
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		try {
-			System.out.println("\nMovimento: "+jogo.construtorJogada(jogo.turno, 7,1, 6,2));
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			System.out.println("\nMovimento: "+jogo.construtorJogada(jogo.turno, 1,0, 2,0));
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			System.out.println("\nMovimento: "+jogo.construtorJogada(jogo.turno, 6,2, 7,1));
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		jogo.construtorJogada(jogo.turno, 0, 0, 0, 1, false);
 		print();
-
-		
-
+		System.out.println("classe:"+jogo.tabuleiro.campo[0][1].getPeça().getClass());
+		System.out.println("movimento: "+jogo.construtorJogada(jogo.turno, 0, 1, 0, 0, false));
+		print();
+		System.out.println("Roque:"+jogo.isRoque(jogo.tabuleiro, true, false));
+		print();
 	}
 	
+	
 	public static void print() {
+		System.out.println("\n");
 		for(int i = 0; i < 8; i++)
 		{
 			System.out.println();

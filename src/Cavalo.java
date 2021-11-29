@@ -1,13 +1,13 @@
 
 public class Cavalo extends Peça{
 	public int identidade;
-	public Cavalo (boolean branca, int identidade) {
-		 super(branca,identidade);
+	public Cavalo (boolean branca, int identidade, boolean primeiroM) {
+		 super(branca,identidade,primeiroM);
 		
 	}
 	public Quadrado fCavalo;
 	
-	public boolean canMove(Tabuleiro tabuleiro,Quadrado inicio,Quadrado fim) {
+	public boolean canMove(Tabuleiro tabuleiro,Quadrado inicio,Quadrado fim,boolean pm) {
 		
 		//proibe de mover a peça para um lugar que tenha uma peça de mesma cor
 		if(fim.getPeça() != null && fim.getPeça().isBranca() == this.isBranca()) {
@@ -21,17 +21,7 @@ public class Cavalo extends Peça{
 			if(x * y != 2) {
 				return false;
 			}
-			/*
-			fCavalo = tabuleiro.campo[fim.getX()][fim.getY()];
-			Tabuleiro tfCavalo = new Tabuleiro();
-			tfCavalo = tabuleiro;
-			tfCavalo.campo[fim.getX()][fim.getY()] = fCavalo;
-			
-			Xeque xeqBispo = new Xeque();
-			if(xeqBispo.xequedetect(tfCavalo, this.isBranca())){
-				return false;
-			}
-			*/
+
 		return true;
 	}
 

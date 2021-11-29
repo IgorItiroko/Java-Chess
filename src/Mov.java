@@ -1,6 +1,5 @@
 
 public class Mov {
-	private Jogador j;
 	private Quadrado ini;
 	private Quadrado fim;
 	private Peça pmov;
@@ -24,9 +23,8 @@ public class Mov {
 		this.fim = fim;
 	}
 
-	public Mov(Jogador j, Quadrado ini, Quadrado fim)
+	public Mov(Quadrado ini, Quadrado fim)
 	{
-		this.j = j;
 		this.ini = ini;
 		this.fim = fim;
 		this.pmov = ini.getPeça();
@@ -39,6 +37,23 @@ public class Mov {
 	public void setRoque(boolean roque) {
 		this.roque = roque;
 	}
+
+	public Peça getPmov() {
+		return pmov;
+	}
+
+	public void setPmov(Peça pmov) {
+		this.pmov = pmov;
+	}
+
+	public Peça getPmorta() {
+		return pmorta;
+	}
+
+	public void setPmorta(Peça pmorta) {
+		this.pmorta = pmorta;
+	}
+	
 	
 	
 }

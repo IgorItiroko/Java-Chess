@@ -10,20 +10,21 @@ public class Tabuleiro extends JComponent {
 		this.resetTabuleiro();
 	}
 	
-	public Quadrado validade (int x, int y) throws Exception
+	public Quadrado validade (int x, int y) 
 	{
-		if(x < 0 || x > 7 || y < 0 || y > 7)
-		 throw new Exception("Index out of bound"); // Alterar para exibição de erro.
+		if(x < 0 || x > 7 || y < 0 || y > 7) {
+			System.out.println("Erro");
+		}
 		return campo[x][y];
 	}
 	public void resetTabuleiro()
 	{
 		/// Peças brancas
-		campo[0][0] = new Quadrado(0, 0, new Peão(true,1));
+		campo[0][0] = new Quadrado(0, 0, new Torre(true,2,true));
 		campo[0][1] = new Quadrado(0, 1, null);
 		campo[0][2] = new Quadrado(0, 2, null);
 		campo[0][3] = new Quadrado(0, 3, null);
-		campo[0][4] = new Quadrado(0, 4, null);
+		campo[0][4] = new Quadrado(0, 4, new Rei(true,5,true));
 		campo[0][5] = new Quadrado(0, 5, null);
 		campo[0][6] = new Quadrado(0, 6, null);
 		campo[0][7] = new Quadrado(0, 7, null);
@@ -38,13 +39,13 @@ public class Tabuleiro extends JComponent {
 		
 		/// Peças Pretas
 		campo[7][0] = new Quadrado(7, 0, null);
-		campo[7][1] = new Quadrado(7, 1, new Rei(false,5));
+		campo[7][1] = new Quadrado(7, 1, null);
 		campo[7][2] = new Quadrado(7, 2, null);
 		campo[7][3] = new Quadrado(7, 3, null);
 		campo[7][4] = new Quadrado(7, 4, null);
 		campo[7][5] = new Quadrado(7, 5, null);
 		campo[7][6] = new Quadrado(7, 6, null);
-		campo[7][7] = new Quadrado(7, 7, null);
+		campo[7][7] = new Quadrado(7, 7, null );
 		campo[6][0] = new Quadrado(6, 0, null);
 		campo[6][1] = new Quadrado(6, 1, null);
 		campo[6][2] = new Quadrado(6, 2, null);

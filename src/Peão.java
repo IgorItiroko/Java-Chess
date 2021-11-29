@@ -1,23 +1,10 @@
 
 public class Peão extends Peça{
-	public boolean primeiroMovimento;
 	public int identidade;
-	public Peão (boolean branca, int identidade) {
-		 super(branca,identidade);
-		 primeiroMovimento = true;
-
+	public Peão (boolean branca, int identidade,boolean primeiroM) {
+		 super(branca,identidade,primeiroM);
 	}
-	public Quadrado fPeão;
-	
-	public void setPrimeiroMovimento(boolean primeiroMovimento) {
-		this.primeiroMovimento = primeiroMovimento;
-	}
-	
-	public boolean getPrimeiroMovimento() {
-		return primeiroMovimento;
-	}
-	
-	public boolean canMove(Tabuleiro tabuleiro,Quadrado inicio,Quadrado fim) {
+	public boolean canMove(Tabuleiro tabuleiro,Quadrado inicio,Quadrado fim,boolean pm) {
 		
 		int x = Math.abs(fim.getX() - inicio.getX());
 		
@@ -28,13 +15,13 @@ public class Peão extends Peça{
 		
 		
 		//proibe de mover a peça mais do que 2 
-		if( getPrimeiroMovimento() == true) {
+		if( this.primeiroM) {
 			if(x >2)
 				return false;
 		}
 		
 		//proibe de mover a peça mais do que 1 caso não seja o primeiro movimento
-		if(getPrimeiroMovimento() == false && x>1) {
+		if(!this.primeiroM && x>1) {
 			return false;
 		}
 		
@@ -70,11 +57,7 @@ public class Peão extends Peça{
 		if(fim.getX() == inicio.getX() && fim.getY() != inicio.getY()) {
 			return false;
 		}
-		
-
-		
-
-		setPrimeiroMovimento(false);
+		this.primeiroM = false;
 		return true;
 	}
 

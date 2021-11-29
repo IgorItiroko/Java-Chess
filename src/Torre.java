@@ -1,21 +1,11 @@
 
 public class Torre extends Peça{
 	public int identidade;
-	public boolean primeiroMovimento;
-	public Torre (boolean branca, int identidade) {
-		 super(branca,identidade);
-		 primeiroMovimento = true;
+	public Torre (boolean branca, int identidade,boolean primeiroM) {
+		 super(branca,identidade,primeiroM);
 	}
-	
-	public void setPrimeiroMovimento(boolean primeiroMovimento) {
-		this.primeiroMovimento = primeiroMovimento;
-	}
-	
-	public boolean getPrimeiroMovimento() {
-		return primeiroMovimento;
-	}
-	
-	public boolean canMove(Tabuleiro tabuleiro,Quadrado inicio,Quadrado fim) {
+
+	public boolean canMove(Tabuleiro tabuleiro,Quadrado inicio,Quadrado fim,boolean pm) {
 		
 		//proibe de mover a peça para um lugar que tenha uma peça de mesma cor
 		if(fim.getPeça() != null && fim.getPeça().isBranca() == this.isBranca()) {
@@ -80,8 +70,11 @@ public class Torre extends Peça{
 				}				
 			}
 		}
-
-		setPrimeiroMovimento(false);
+		
+		if(!pm) {
+			this.primeiroM = false;
+		}
+		
 		return true;
 	}
 }
