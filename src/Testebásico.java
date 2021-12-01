@@ -2,8 +2,7 @@
 public class Testebásico {
 	private static Jogo jogo;
 	private static Jogador[] jogadores = new Jogador[2];
-	public static void main(String[] args)
-	
+	public static void main(String[] args)	
 	{
 		jogadores[0] = new Jogador(true);
 		jogadores[1] = new Jogador(false);

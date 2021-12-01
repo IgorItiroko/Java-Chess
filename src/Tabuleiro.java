@@ -1,10 +1,7 @@
-import javax.swing.JComponent;
 
+public class Tabuleiro{
 
-@SuppressWarnings("serial")
-public class Tabuleiro extends JComponent {
-	Quadrado[][] campo = new Quadrado[8][8];
-	
+	public static  Quadrado[][] campo = new Quadrado[8][8];
 	public Tabuleiro()
 	{
 		this.resetTabuleiro();
@@ -17,6 +14,23 @@ public class Tabuleiro extends JComponent {
 		}
 		return campo[x][y];
 	}
+	
+	public static void printTabuleiro() {
+        for(int i = 0; i < 8; i++)
+        {
+            System.out.println();
+            for(int j = 0; j < 8; j++)
+            {
+                if(campo[i][j].getPeça() == null)
+                {
+                    System.out.print("| 0 |");
+                }
+                else
+                    System.out.print("| " + campo[i][j].getPeça().getIdentidade() + " |");
+            }
+        }
+    }
+	
 	public void resetTabuleiro()
 	{
 		/// Peças brancas
