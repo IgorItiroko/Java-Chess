@@ -43,7 +43,7 @@ public class Menu {
                             gui.add(menuInicial);
                             gui.setLayout(new FlowLayout());
                             gui.setVisible(false);
-                            gui.setSize(735,564);
+                            gui.setSize(735,584);
                             gui.setLocationRelativeTo(null);
                             gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                             gui.setVisible(true);

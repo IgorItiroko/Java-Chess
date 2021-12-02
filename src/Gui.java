@@ -60,25 +60,61 @@ public class Gui extends JFrame{
             addMouseListener(new MouseAdapter(){
                 public void mousePressed(MouseEvent e) {
                     Point cord = e.getPoint();
-                    if(scan)
+                    if((cord.x > 556 && cord.x < 707) && (cord.y > 416 && cord.y < 464))
                     {
-                        System.out.println(cord.x+","+cord.y);
-                        Xi = (int) (cord.x - 15 ) / 64;
-                        Yi = (int) (cord.y - 50) / 64;
-                        System.out.println("X,Y Inicial:" +Xi+","+Yi);
-                        scan = false;
+                    	System.out.println("Propor empate");
+                    	/// Propor empate para o outro jogador.
                     }
-                    else{
-                        System.out.println(cord.x+","+cord.y);
-                        Xf = (int) (cord.x - 15 ) / 64;
-                        Yf = (int) (cord.y - 50) / 64;
-                        System.out.println("X,Y Final:"+Xf+","+Yf);
-                        jogo.construtorJogada(jogo.turno, Yi, Xi, Yf, Xf, false);
-                        scan = true;
-                        jogo.tabuleiro.printTabuleiro();
-                    }
-                    
-                    
+                    else
+                    {
+	                    if((cord.x > 556 && cord.x < 707) && (cord.y > 342 && cord.y < 389))
+	                    {
+	                    	if(jogo.turno.isLadobranco())
+	                    	{
+	                    		System.out.println("O jogador do lado preto ganhou!");
+	                    	}
+	                    	else
+	                    		System.out.println("O jogador do lado branco ganhou!");
+	                    }
+	                    else
+	                    {
+		                    if((cord.x > 556 && cord.x < 707) && (cord.y > 152 && cord.y < 202))
+		                    {
+		                    	jogo.isRoque(jogo.tabuleiro,jogo.turno.isLadobranco() ,true);
+		                    	jogo.tabuleiro.printTabuleiro();
+		                    }
+		                    else
+		                    {
+		                    	if((cord.x > 555 && cord.x < 706) && (cord.y > 224 && cord.y < 272))
+		                    			{
+		                    				jogo.isRoque(jogo.tabuleiro, jogo.turno.isLadobranco(), false);
+		                    				jogo.tabuleiro.printTabuleiro();
+		                    			}
+		                    	else
+		                    	{
+		    	                    if(scan)
+		    	                    {
+		    	                        System.out.println(cord.x+","+cord.y);
+		    	                        Xi = (int) (cord.x - 15 ) / 64;
+		    	                        Yi = (int) (cord.y - 50) / 64;
+		    	                        System.out.println("X,Y Inicial:" +Xi+","+Yi);
+		    	                        scan = false;
+		    	                    }
+		    	                    else{
+		    	                        System.out.println(cord.x+","+cord.y);
+		    	                        Xf = (int) (cord.x - 15 ) / 64;
+		    	                        Yf = (int) (cord.y - 50) / 64;
+		    	                        System.out.println("X,Y Final:"+Xf+","+Yf);
+		    	                        ///jogo.construtorJogada(jogo.turno, Yi, Xi, Yf, Xf, false);
+		    	                        scan = true;
+		    	                        jogo.tabuleiro.printTabuleiro();   
+		    	                    }
+		                    	}
+		
+		                    }
+	                    }
+	                    
+	                }
                 }
                 
             });

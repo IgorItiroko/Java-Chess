@@ -411,7 +411,6 @@ public class Jogo{
             move.getFim().setPeça(null);
             return false;
         }
-
         /*
         if(!verific)
         {
@@ -423,8 +422,7 @@ public class Jogo{
                 this.turno = jogadores[0];
             }
         }
-
-    */
+		*/
         
         return true;
 
