@@ -84,7 +84,6 @@ public class Bispo extends Peça{
 					}
 			}
 		}
-			
 		return true;
 	}
 
