@@ -87,6 +87,7 @@ public class Jogo{
             {
                 for(int j = 0; j < 8; j++)
                 {
+<<<<<<< Updated upstream
                 	if(tabuleiro.campo[i][j].getPeça() != null && tabuleiro.campo[i][j].getPeça().isBranca())
                 	{
                 		for(int p = 0; p < 8; p++)
@@ -106,6 +107,27 @@ public class Jogo{
                 			}
                 		}
                 	}
+=======
+                    if(Tabuleiro.campo[i][j].getPeça() != null && tabuleiro.campo[i][j].getPeça().isBranca())
+                    {
+                        for(int p = 0; p < 8; p++)
+                        {
+                            for(int q = 0; q < 8; q++)
+                            {
+                                this.construtorJogada(this.turno, i, j ,p ,q, true);
+                                if(xequedetect(this.tabuleiro,this.turno.isLadobranco()))
+                                {
+                                    desfazerJogada(this.ultimoMovimento);
+                                }
+                                else
+                                {
+                                    desfazerJogada(this.ultimoMovimento);
+                                    return false;
+                                }
+                            }
+                        }
+                    }
+>>>>>>> Stashed changes
                     
                 }
             }
