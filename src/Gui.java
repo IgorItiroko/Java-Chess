@@ -80,6 +80,7 @@ public class Gui extends JFrame{
 	                    {
 		                    if((cord.x > 556 && cord.x < 707) && (cord.y > 152 && cord.y < 202))
 		                    {
+		                    	System.out.println();
 		                    	jogo.isRoque(jogo.tabuleiro,jogo.turno.isLadobranco() ,true);
 		                    	jogo.tabuleiro.printTabuleiro();
 		                    }
@@ -87,6 +88,7 @@ public class Gui extends JFrame{
 		                    {
 		                    	if((cord.x > 555 && cord.x < 706) && (cord.y > 224 && cord.y < 272))
 		                    			{
+		                    				System.out.println();
 		                    				jogo.isRoque(jogo.tabuleiro, jogo.turno.isLadobranco(), false);
 		                    				jogo.tabuleiro.printTabuleiro();
 		                    			}
@@ -105,7 +107,7 @@ public class Gui extends JFrame{
 		    	                        Xf = (int) (cord.x - 15 ) / 64;
 		    	                        Yf = (int) (cord.y - 50) / 64;
 		    	                        System.out.println("X,Y Final:"+Xf+","+Yf);
-		    	                        ///jogo.construtorJogada(jogo.turno, Yi, Xi, Yf, Xf, false);
+		    	                        jogo.construtorJogada(jogo.turno, Yi, Xi, Yf, Xf, false);
 		    	                        scan = true;
 		    	                        jogo.tabuleiro.printTabuleiro();   
 		    	                    }

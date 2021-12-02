@@ -26,7 +26,7 @@ public class Menu {
             mm.add(menuInicial);
             mm.setLayout(new FlowLayout());
             mm.setVisible(false);
-            mm.setSize(600,600);
+            mm.setSize(600,645);
             mm.setLocationRelativeTo(null);
             mm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             mm.setVisible(true);
