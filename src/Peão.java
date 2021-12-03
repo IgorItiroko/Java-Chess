@@ -18,6 +18,16 @@ public class Peão extends Peça{
 		if( this.primeiroM) {
 			if(x >2)
 				return false;
+			if(inicio.getX() > fim.getX()) {
+				if(tabuleiro.campo[fim.getX() +1][inicio.getY()].getPeça() != null) {
+					return false;
+				}
+			}
+			if(fim.getX() > inicio.getX()) {
+				if(tabuleiro.campo[inicio.getX() +1][inicio.getY()].getPeça() != null) {
+					return false;
+				}
+			}
 		}
 		
 		//proibe de mover a peça mais do que 1 caso não seja o primeiro movimento
@@ -37,7 +47,7 @@ public class Peão extends Peça{
 			}
 			
 			//Proibe as peças brancas de andarem para frente caso haja uma peça no local destino
-			if(fim.getPeça() != null && this.isBranca() && fim.getX() > inicio.getX() && inicio.getX() +1 == fim.getX()) {
+			if(fim.getPeça() != null && this.isBranca() && fim.getX() > inicio.getX()) {
 				return false;
 			}
 			
@@ -48,7 +58,7 @@ public class Peão extends Peça{
 			}
 			
 			//Proibe as peças pretas de andarem para frente caso haja uma peça no local destino
-			if(fim.getPeça() != null && !this.isBranca() && fim.getX() < inicio.getX() && fim.getX() +1 == inicio.getX()) {
+			if(fim.getPeça() != null && !this.isBranca() && fim.getX() < inicio.getX()) {
 				return false;
 			} 
 										

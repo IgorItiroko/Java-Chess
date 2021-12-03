@@ -41,12 +41,12 @@ public class Menu {
                             
                             Gui gui = new Gui();
                             gui.add(menuInicial);
-                            gui.setLayout(new FlowLayout());
-                            gui.setVisible(false);
-                            gui.setSize(735,584);
+                            gui.setLayout(null);
+                            gui.setSize(735,560);
                             gui.setLocationRelativeTo(null);
                             gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                             gui.setVisible(true);
+                            gui.setResizable(false);
                             mm.dispose();
                             
                             
@@ -56,7 +56,7 @@ public class Menu {
                             
                     }
                     if((z.getX() > 155 && z.getX() < 457) && (z.getY() > 432 && z.getY() < 518)) {
-                        java.lang.System.exit(0);
+                        System.exit(0);
                     }
                     
                 }

@@ -366,6 +366,16 @@ public class Jogo{
         this.tabuleiro.campo[move.getFim().getX()][move.getFim().getY()].setPeça(move.getPmorta());
     }
     
+    public void mudaTurno() {
+    	if(this.turno == jogadores[0])
+        {
+            this.turno = jogadores[1];
+        }
+        else {
+            this.turno = jogadores[0];
+        }
+    }
+    
     public boolean Jogada(Mov move, Jogador j, boolean verific)
     {
         Peça escolhida = move.getIni().getPeça();
@@ -411,7 +421,7 @@ public class Jogo{
             move.getFim().setPeça(null);
             return false;
         }
-        /*
+        
         if(!verific)
         {
             if(this.turno == jogadores[0])
@@ -422,7 +432,7 @@ public class Jogo{
                 this.turno = jogadores[0];
             }
         }
-		*/
+		
         
         return true;
 
