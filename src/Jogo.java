@@ -417,8 +417,7 @@ public class Jogo{
         
         if (xequedetect(tabuleiro, j.isLadobranco()))
         {
-            move.getIni().setPeça(move.getFim().getPeça());
-            move.getFim().setPeça(null);
+            desfazerJogada(this.ultimoMovimento);
             return false;
         }
         

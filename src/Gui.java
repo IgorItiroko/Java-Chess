@@ -68,8 +68,8 @@ public class Gui extends JFrame{
             jogo.iniciar(jogadores[0],jogadores[1]);
             //setSize(735,564);
             
-            jogadores[0].setNome("Carlos");
-            jogadores[1].setNome("Denis");
+            jogadores[0].setNome("Gato");
+            jogadores[1].setNome("Cachorro");
             
             layer.setBounds(0,0,735,564);
             layer.add(imgBoard,JLayeredPane.DEFAULT_LAYER);
@@ -96,8 +96,8 @@ public class Gui extends JFrame{
                     
                     if(scan)
                     {
-                    	Xi = (int) (cord.x-15) / 64;
-                        Yi = (int) (cord.y - 70) / 64;
+                    	Xi = (int) (cord.x - 15) / 64;
+                        Yi = (int) (cord.y - 33) / 64;
                         System.out.println(cord.x+","+cord.y);
                         System.out.println("X,Y Inicial:" +Xi+","+Yi);
                         scan = false;
@@ -105,10 +105,11 @@ public class Gui extends JFrame{
                     else{
                         System.out.println(cord.x+","+cord.y);
                         Xf = (int) (cord.x - 15 ) / 64;
-                        Yf = (int) (cord.y -70) / 64;
+                        Yf = (int) (cord.y - 33) / 64;
                         System.out.println("X,Y Final:"+Xf+","+Yf);
                         if((Xi < 8 && Yi < 8) && (Xf < 8 && Yf < 8)) {
                         	jogo.construtorJogada(jogo.turno, Yi, Xi, Yf, Xf, false);
+                        	mudancaTurno.setText("Turno do \n" + jogo.turno.nome);
                             jogo.tabuleiro.printTabuleiro();
                            iniciarTabuleiro(false);
 
@@ -160,6 +161,8 @@ public class Gui extends JFrame{
 		                    	System.out.println();
 		                    	if(jogo.isRoque(jogo.tabuleiro,jogo.turno.isLadobranco() ,true)) {
 		                    		jogo.mudaTurno();
+		                    		iniciarTabuleiro(false);
+		                    		mudancaTurno.setText("Turno do \n" + jogo.turno.nome);
 		                    	}
 		                    	jogo.tabuleiro.printTabuleiro();
 		                    }
@@ -169,6 +172,8 @@ public class Gui extends JFrame{
 		                    			System.out.println();
 		                    			if(jogo.isRoque(jogo.tabuleiro, jogo.turno.isLadobranco(), false)) {
 		                    				jogo.mudaTurno();
+		                    				iniciarTabuleiro(false);
+		                    				mudancaTurno.setText("Turno do \n" + jogo.turno.nome);
 		                    			}
 		                    			jogo.tabuleiro.printTabuleiro();
 		                    		}		                    					                    	                    	                    	              
