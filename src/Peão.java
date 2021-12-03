@@ -16,15 +16,16 @@ public class Peão extends Peça{
 		
 		//proibe de mover a peça mais do que 2 
 		if( this.primeiroM) {
-			if(x >2)
-				return false;
-			if(inicio.getX() > fim.getX()) {
-				if(tabuleiro.campo[fim.getX() +1][inicio.getY()].getPeça() != null) {
+			if(x >2) {
+			return false;
+			}
+			if(this.isBranca()) {
+				if(tabuleiro.campo[inicio.getX()+1][inicio.getY()].getPeça()!= null) {
 					return false;
 				}
 			}
-			if(fim.getX() > inicio.getX()) {
-				if(tabuleiro.campo[inicio.getX() +1][inicio.getY()].getPeça() != null) {
+			if(!this.isBranca()) {
+				if(tabuleiro.campo[inicio.getX()-1][inicio.getY()].getPeça()!= null) {
 					return false;
 				}
 			}
@@ -46,25 +47,24 @@ public class Peão extends Peça{
 				return false;
 			}
 			
-			//Proibe as peças brancas de andarem para frente caso haja uma peça no local destino
-			if(fim.getPeça() != null && this.isBranca() && fim.getX() > inicio.getX()) {
-				return false;
-			}
-			
-			
 			//Proibe peças pretas de andarem para o sul
 			if(!this.isBranca() && inicio.getX() < fim.getX()) {
 				return false;
 			}
 			
-			//Proibe as peças pretas de andarem para frente caso haja uma peça no local destino
-			if(fim.getPeça() != null && !this.isBranca() && fim.getX() < inicio.getX()) {
+			if( this.isBranca() && tabuleiro.campo[inicio.getX()+1][inicio.getY()].getPeça() != null && fim.getY() == inicio.getY()) {
 				return false;
-			} 
-										
+			}
+			
+			if( !this.isBranca() && tabuleiro.campo[inicio.getX()-1][inicio.getY()].getPeça() != null && fim.getY() == inicio.getY()) {
+				return false;
+			}
 		
 		//proibe de mover a peça na horizontal
 		if(fim.getX() == inicio.getX() && fim.getY() != inicio.getY()) {
+			return false;
+		}
+		if(Math.abs(inicio.getY() - fim.getY()) > 1) {
 			return false;
 		}
 		this.primeiroM = false;

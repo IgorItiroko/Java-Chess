@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 public class Menu {
-    
+    private static Jogador[] jogadores = new Jogador[2];
     public static menuPrincipal menu;
     public static JFrame mm;
     public static void main(String[] args) {
@@ -22,6 +22,8 @@ public class Menu {
         
         public menuPrincipal() {
             //Tela
+        	jogadores[0] = new Jogador(true);
+            jogadores[1] = new Jogador(false);
             mm = new JFrame();
             mm.add(menuInicial);
             mm.setLayout(new FlowLayout());
@@ -38,17 +40,9 @@ public class Menu {
                     System.out.println(z.x + "," + z.y);
                     
                     if((z.getX() > 146 && z.getX() < 455) && (z.getY() > 149 && z.getY() < 235)) {
-                            
-                            Gui gui = new Gui();
-                            gui.add(menuInicial);
-                            gui.setLayout(null);
-                            gui.setSize(735,560);
-                            gui.setLocationRelativeTo(null);
-                            gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                            gui.setVisible(true);
-                            gui.setResizable(false);
-                            mm.dispose();
-                            
+                    	mm.dispose();
+                    	Telainicial iT = new Telainicial(jogadores[0],jogadores[1]);
+                    	
                             
                     }
                     if((z.getX() > 154 && z.getX() < 457) && (z.getY() > 282 && z.getY() < 378)) {

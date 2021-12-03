@@ -1,7 +1,11 @@
-import java.awt.EventQueue;
+
 import java.util.List;
 
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
+
 public class Jogo{
+	public JComboBox opções;
 	public Tabuleiro tabuleiro;
 	public static Jogador[] jogadores = new Jogador[2];
 	public Jogador turno;
@@ -9,7 +13,7 @@ public class Jogo{
 	public String codigo[];
 	public Telainicial tela;
 	public Mov ultimoMovimento;
-	
+	public int escolhaP = 0;
 	
 	void iniciar(Jogador j1, Jogador j2)
 	{
@@ -32,7 +36,83 @@ public class Jogo{
         move.getIni().setPeça(null);
     }
 
-
+	public void promovePeao(boolean branco) {
+			if(branco) {
+				for(int i = 0;i<8; i++) {
+					if(tabuleiro.campo[7][i].getPeça() != null) {
+						if(tabuleiro.campo[7][i].getPeça().getIdentidade() == 1 && tabuleiro.campo[7][i].getPeça().isBranca() ) {
+							do {
+								Object[] optionsGC = {"<Selecione a Opção Desejada>", "Torre","Cavalo","Bispo","Rainha"}																						;
+							     opções = new JComboBox(optionsGC);
+							     JOptionPane.showMessageDialog(null, opções, "Selecione a peça na qual o peão se tornará.",
+							          JOptionPane.INFORMATION_MESSAGE);
+							     	escolhaP = opções.getSelectedIndex();
+							     	
+							     	switch(escolhaP){
+							     		case 1:
+							     			Tabuleiro.campo[7][i] = null;
+							     			Tabuleiro.campo[7][i] = new Quadrado(7, i, new Torre(true,2,true));break;
+							     		case 2:
+							     			Tabuleiro.campo[7][i] = null;
+							     			Tabuleiro.campo[7][i] = new Quadrado(7, i, new Cavalo(true,3,true));break;
+							     		case 3:
+							     			Tabuleiro.campo[7][i] = null;
+							     			Tabuleiro.campo[7][i] = new Quadrado(7, i, new Bispo(true,4,true));break;
+							     		case 4:
+							     			Tabuleiro.campo[7][i] = null;
+							     			Tabuleiro.campo[7][i] = new Quadrado(7, i, new Rainha(true,6,true));break;
+							     		default: break;
+							     	}
+							}while(escolhaP == 0);
+								 
+								     	
+							}
+							
+						}
+						
+					}
+					
+				}
+			
+			if(!branco) {
+				for(int i = 0;i<8; i++) {
+					if(tabuleiro.campo[0][i].getPeça() != null) {
+						if(tabuleiro.campo[0][i].getPeça().getIdentidade() == 1 && !tabuleiro.campo[0][i].getPeça().isBranca()) {
+							do {
+								Object[] optionsGC = {"<Selecione a Opção Desejada>", "Torre","Cavalo","Bispo","Rainha"}																						;
+							     opções = new JComboBox(optionsGC);
+							     JOptionPane.showMessageDialog(null, opções, "Selecione a peça na qual o peão se tornará.",
+							          JOptionPane.INFORMATION_MESSAGE);
+							     	escolhaP = opções.getSelectedIndex();
+							     	
+							     	switch(escolhaP){
+							     		case 1:
+							     			Tabuleiro.campo[0][i] = null;
+							     			Tabuleiro.campo[0][i] = new Quadrado(7, i, new Torre(false,2,true));break;
+							     		case 2:
+							     			Tabuleiro.campo[0][i] = null;
+							     			Tabuleiro.campo[0][i] = new Quadrado(7, i, new Cavalo(false,3,true));break;
+							     		case 3:
+							     			Tabuleiro.campo[0][i] = null;
+							     			Tabuleiro.campo[0][i] = new Quadrado(7, i, new Bispo(false,4,true));break;
+							     		case 4:
+							     			Tabuleiro.campo[0][i] = null;
+							     			Tabuleiro.campo[0][i] = new Quadrado(7, i, new Rainha(false,6,true));break;
+							     		default: break;
+							     	}
+							}while(escolhaP == 0);
+							
+						}
+						
+					}
+					
+				}
+			}
+			
+		
+		
+	}
+	
 	
 	  public boolean faltaPeças(Tabuleiro tabuleiro)
 	    {

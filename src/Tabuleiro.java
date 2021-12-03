@@ -33,7 +33,6 @@ public class Tabuleiro{
 	
 	public void resetTabuleiro()
 	{
-		/// Peças Brancas
 		campo[0][0] = new Quadrado(0, 0, new Torre(true,2,true));
 		campo[0][1] = new Quadrado(0, 1, new Cavalo(true,3,true));
 		campo[0][2] = new Quadrado(0, 2, new Bispo(true,4,true));

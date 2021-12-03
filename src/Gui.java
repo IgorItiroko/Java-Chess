@@ -1,24 +1,17 @@
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
+
 import java.awt.Point;
-import java.awt.RenderingHints;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
+
 import java.awt.*;
 import javax.swing.ImageIcon;
-import javax.swing.JComponent;
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JButton;
-import javax.swing.JTextPane;
+
 import javax.swing.JTextArea;
 
 
@@ -59,47 +52,42 @@ public class Gui extends JFrame{
     public JLayeredPane layer = new JLayeredPane();
     
     
-        public Gui() {
-        	
-        	
-            jogadores[0] = new Jogador(true);
-            jogadores[1] = new Jogador(false);
-            jogo = new Jogo();
-            jogo.iniciar(jogadores[0],jogadores[1]);
-            //setSize(735,564);
-            
-            jogadores[0].setNome("Gato");
-            jogadores[1].setNome("Cachorro");
-            
-            layer.setBounds(0,0,735,564);
-            layer.add(imgBoard,JLayeredPane.DEFAULT_LAYER);
-            
-            
-            JTextArea mudancaTurno = new JTextArea();
-            mudancaTurno.setFont(new Font("SansSerif", Font.PLAIN, 20));
-            mudancaTurno.setBackground(Color.decode("#efe4b0"));
-            mudancaTurno.setText("Turno do \n" + jogo.turno.nome);
-            mudancaTurno.setForeground(Color.decode("#585858"));
-            mudancaTurno.setBounds(549, 21, 149, 56);
-            mudancaTurno.setEditable(false);
-            getContentPane().add(mudancaTurno);
-           // getContentPane().setLayout(null);
-            imgBoard.setBounds(0, 0, 719, 523);
-            getContentPane().add(layer);
-            
-            iniciarTabuleiro(true);
+    public Gui(Jogador j1, Jogador j2) {
+
+        jogo = new Jogo();
+        jogo.iniciar(j1,j2);
+        //setSize(735,564);
+        
+        layer.setBounds(0,0,735,564);
+        layer.add(imgBoard,JLayeredPane.DEFAULT_LAYER);
+        
+        
+        JTextArea mudancaTurno = new JTextArea();
+        mudancaTurno.setFont(new Font("SansSerif", Font.PLAIN, 20));
+        mudancaTurno.setBackground(Color.decode("#efe4b0"));
+        mudancaTurno.setText("Turno do \n" + jogo.turno.nome);
+        mudancaTurno.setForeground(Color.decode("#585858"));
+        mudancaTurno.setBounds(549, 21, 149, 56);
+        mudancaTurno.setEditable(false);
+        getContentPane().add(mudancaTurno);
+       // getContentPane().setLayout(null);
+        imgBoard.setBounds(0, 0, 719, 523);
+        getContentPane().add(layer);
+        
+        iniciarTabuleiro(true);
             
             
             addMouseListener(new MouseAdapter(){
                 public void mousePressed(MouseEvent e) {
                     Point cord = e.getPoint();
-                    
                     if(scan)
                     {
+                    	jogo.promovePeao(jogo.turno.isLadobranco());
                     	Xi = (int) (cord.x - 15) / 64;
                         Yi = (int) (cord.y - 33) / 64;
                         System.out.println(cord.x+","+cord.y);
                         System.out.println("X,Y Inicial:" +Xi+","+Yi);
+                      
                         scan = false;
                     }
                     else{
@@ -108,6 +96,7 @@ public class Gui extends JFrame{
                         Yf = (int) (cord.y - 33) / 64;
                         System.out.println("X,Y Final:"+Xf+","+Yf);
                         if((Xi < 8 && Yi < 8) && (Xf < 8 && Yf < 8)) {
+                        	
                         	jogo.construtorJogada(jogo.turno, Yi, Xi, Yf, Xf, false);
                         	mudancaTurno.setText("Turno do \n" + jogo.turno.nome);
                             jogo.tabuleiro.printTabuleiro();
