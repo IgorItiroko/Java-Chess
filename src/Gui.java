@@ -79,10 +79,10 @@ public class Gui extends JFrame{
             
             addMouseListener(new MouseAdapter(){
                 public void mousePressed(MouseEvent e) {
-                    Point cord = e.getPoint();
+                    Point cord = e.getPoint();                   
                     if(scan)
                     {
-                    	jogo.promovePeao(jogo.turno.isLadobranco());
+                    	
                     	Xi = (int) (cord.x - 15) / 64;
                         Yi = (int) (cord.y - 33) / 64;
                         System.out.println(cord.x+","+cord.y);
@@ -91,6 +91,7 @@ public class Gui extends JFrame{
                         scan = false;
                     }
                     else{
+                    	
                         System.out.println(cord.x+","+cord.y);
                         Xf = (int) (cord.x - 15 ) / 64;
                         Yf = (int) (cord.y - 33) / 64;
