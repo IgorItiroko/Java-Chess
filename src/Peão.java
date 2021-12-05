@@ -67,7 +67,10 @@ public class Peão extends Peça{
 		if(Math.abs(inicio.getY() - fim.getY()) > 1) {
 			return false;
 		}
-		this.primeiroM = false;
+		if(!pm)
+		{
+			this.primeiroM = false;
+		}
 		return true;
 	}
 

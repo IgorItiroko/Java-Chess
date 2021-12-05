@@ -113,7 +113,6 @@ public class Jogo{
 		
 	}
 	
-	
 	  public boolean faltaPeças(Tabuleiro tabuleiro)
 	    {
 	        for(int i = 0; i < 8; i++)
@@ -518,4 +517,36 @@ public class Jogo{
         
     }
 
+    String codificaJogada(int xi, int yi, int xf, int yf)
+    {
+    	String codigo = new String();
+    	codigo = "";
+    	
+    	switch(xi)
+    	{
+    	case 0: {codigo = codigo + "a"; break;}
+    	case 1: {codigo = codigo + "b"; break;}
+    	case 2: {codigo = codigo + "c"; break;}
+    	case 3: {codigo = codigo + "d"; break;}
+    	case 4: {codigo = codigo + "e"; break;}
+    	case 5: {codigo = codigo + "f"; break;}
+    	case 6: {codigo = codigo + "g"; break;}
+    	case 7: {codigo = codigo + "h"; break;}
+    	}
+    	codigo = codigo + yi;
+    	codigo = codigo + " ";
+    	switch(xf)
+    	{
+    	case 0: {codigo = codigo + "a"; break;}
+    	case 1: {codigo = codigo + "b"; break;}
+    	case 2: {codigo = codigo + "c"; break;}
+    	case 3: {codigo = codigo + "d"; break;}
+    	case 4: {codigo = codigo + "e"; break;}
+    	case 5: {codigo = codigo + "f"; break;}
+    	case 6: {codigo = codigo + "g"; break;}
+    	case 7: {codigo = codigo + "h"; break;}
+    	}
+    	codigo = codigo + yf; 
+    	return codigo;
+    }
 }

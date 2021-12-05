@@ -2,17 +2,23 @@ import java.awt.FlowLayout;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 public class Menu {
     private static Jogador[] jogadores = new Jogador[2];
     public static menuPrincipal menu;
     public static JFrame mm;
-    public static void main(String[] args) {
-         menu = new menuPrincipal ();
+    private static Jogo jogo;
+    public static void main(String[] args) throws FileNotFoundException {
+
+        menu = new menuPrincipal ();
     }
     
     
@@ -50,7 +56,6 @@ public class Menu {
                             
                     }
                     if((z.getX() > 155 && z.getX() < 457) && (z.getY() > 432 && z.getY() < 518)) {
-                        System.exit(0);
                     }
                     
                 }
