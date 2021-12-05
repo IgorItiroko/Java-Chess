@@ -74,7 +74,16 @@ public class Gui extends JFrame{
         		{
         			if(tabuleiro.campo[x][y].getPeça().canMove(tabuleiro, tabuleiro.campo[x][y], tabuleiro.campo[i][j], true))
         			{
-        				System.out.println(j + " " + i);
+        				jogo.construtorJogada(jogo.turno,y,x,j,i,true);
+        				if(jogo.xequedetect(tabuleiro, jogo.turno.isLadobranco()))
+        				{
+        					jogo.desfazerJogada(jogo.ultimoMovimento);
+        				}
+        				else
+        				{
+        					jogo.desfazerJogada(jogo.ultimoMovimento);
+        					System.out.println(i + " " + j);
+        				}
         			}
         		}
         	}
@@ -122,7 +131,6 @@ public class Gui extends JFrame{
                     Point cord = e.getPoint();
                     if(scan)
                     {
-                    	jogo.promovePeao(jogo.turno.isLadobranco());
                     	Xi = (int) (cord.x - 15) / 64;
                         Yi = (int) (cord.y - 33) / 64;
                         System.out.println(cord.x+","+cord.y);
@@ -247,6 +255,7 @@ public class Gui extends JFrame{
 		                    			}
 		                    			Tabuleiro.printTabuleiro();
 		                    		}
+		                    // Simular ultimo jogo
 		                    if((cord.x > 555 && cord.x < 706) && (cord.y > 472 && cord.y < 520))
 		                    {
 		                    	iniciarTabuleiro(true);
@@ -306,21 +315,12 @@ public class Gui extends JFrame{
     		jogo.pulaCanMove(sYi, sXi, sYf, sXf);
     		iniciarTabuleiro(false);
 				try {
-					Thread.sleep(1000);
+					Thread.sleep(500);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-
-    		if(jogo.xequematedetect(jogo.tabuleiro, jogo.turno.isLadobranco()))
-    		{
-    			if(jogo.xequematedetect(jogo.tabuleiro, jogo.turno.isLadobranco()))
-           		{
-           		JOptionPane.showMessageDialog(null, "Xeque-mate, fim da simulação","Fim de jogo!",JOptionPane.PLAIN_MESSAGE);
-           		}
-            }
-    		
     	}
-    		
+   		JOptionPane.showMessageDialog(null, "Fim da simulação","Fim de jogo!",JOptionPane.PLAIN_MESSAGE);	
     	}
     	
         public void iniciarTabuleiro(boolean op) {

@@ -88,16 +88,16 @@ public class Jogo{
 							     	switch(escolhaP){
 							     		case 1:
 							     			Tabuleiro.campo[0][i] = null;
-							     			Tabuleiro.campo[0][i] = new Quadrado(7, i, new Torre(false,2,true));break;
+							     			Tabuleiro.campo[0][i] = new Quadrado(0, i, new Torre(false,2,true));break;
 							     		case 2:
 							     			Tabuleiro.campo[0][i] = null;
-							     			Tabuleiro.campo[0][i] = new Quadrado(7, i, new Cavalo(false,3,true));break;
+							     			Tabuleiro.campo[0][i] = new Quadrado(0, i, new Cavalo(false,3,true));break;
 							     		case 3:
 							     			Tabuleiro.campo[0][i] = null;
-							     			Tabuleiro.campo[0][i] = new Quadrado(7, i, new Bispo(false,4,true));break;
+							     			Tabuleiro.campo[0][i] = new Quadrado(0, i, new Bispo(false,4,true));break;
 							     		case 4:
 							     			Tabuleiro.campo[0][i] = null;
-							     			Tabuleiro.campo[0][i] = new Quadrado(7, i, new Rainha(false,6,true));break;
+							     			Tabuleiro.campo[0][i] = new Quadrado(0, i, new Rainha(false,6,true));break;
 							     		default: break;
 							     	}
 							}while(escolhaP == 0);
@@ -511,7 +511,7 @@ public class Jogo{
             }
         }
 		
-        
+        promovePeao(!this.turno.isLadobranco());
         return true;
 
         

@@ -56,6 +56,7 @@ public class Menu {
                             
                     }
                     if((z.getX() > 155 && z.getX() < 457) && (z.getY() > 432 && z.getY() < 518)) {
+                    	System.exit(0);
                     }
                     
                 }
