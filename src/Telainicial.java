@@ -36,6 +36,7 @@ public class Telainicial{
         frame.getContentPane().setBackground(Color.WHITE);
         frame.setBounds(100, 100, 600, 645);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLocationRelativeTo(null);
         ImageIcon img = new ImageIcon(this.getClass().getResource("/images/InserirNomes.png"));
         frame.getContentPane().setLayout(null);
         

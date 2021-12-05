@@ -29,6 +29,9 @@ public class Peão extends Peça{
 					return false;
 				}
 			}
+			if(inicio.getY() != fim.getY()) {
+				return false;
+			}
 		}
 		
 		//proibe de mover a peça mais do que 1 caso não seja o primeiro movimento
