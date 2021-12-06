@@ -84,6 +84,11 @@ public class Gui extends JFrame{
     JFrame catWins;
     JLabel dog = new JLabel(dw);
     JLabel cat = new JLabel(cw);
+    //Tela de empate
+    ImageIcon ep = new ImageIcon(getClass().getResource("images/empate.png"));
+    JFrame empate;
+    JLabel emp = new JLabel(ep);
+    
     public void jogadasPossiveis(int x, int y) {
     	int indx = 0;    	
     	for(int i =0 ; i<32; i++) {
@@ -170,12 +175,14 @@ public class Gui extends JFrame{
                         System.out.println("X,Y Inicial:" +Xi+","+Yi);
                         
                         //Imagem do Seletor
-                        selection.setIcon(select);
-                        selection.setBounds(Xi*65,Yi*65,64,64);
-                        layer.add(selection,JLayeredPane.PALETTE_LAYER);
+                       
                         
                         if(Xi < 8 && Yi < 8)
                         {
+                        	 selection.setIcon(select);
+                             selection.setBounds(Xi*65,Yi*65,64,64);
+                             layer.add(selection,JLayeredPane.PALETTE_LAYER);
+                             
                             if(tabuleiro.campo[Yi][Xi].getPeça() != null)
                             {
                                 jogadasPossiveis(Yi, Xi);
@@ -196,7 +203,47 @@ public class Gui extends JFrame{
                         	codigos.add(jogo.codificaJogada(Xi,Yi,Xf,Yf));
                             Tabuleiro.printTabuleiro();
                             iniciarTabuleiro(false);
-                            
+                            System.out.println(jogo.movimento);
+                            if(jogo.movimento == 100 ) {
+                            	int empt = JOptionPane.showConfirmDialog(null,"Foram realizados 100 movimentos onde nenhum dos jogadores realizaram a captura de uma peça ou o movimento de um peão"
+                            			+ " deseja propor empate ?","Regra dos movimentos consecutivos",JOptionPane.YES_NO_OPTION);
+                            	if(empt == 0) {
+	                            	if(jogo.turno.isLadobranco()) {
+	                            		lado = 1;
+		                            	}
+		                            	else
+		                            		lado = 2;
+	                            	
+		                            	int input = JOptionPane.showConfirmDialog(null,"O Jogador "+lado+" propos empate! Deseja aceitar ?","Proposta de empate",JOptionPane.YES_NO_OPTION);
+		                            	
+		                               	if(input == 0) {
+		                               		empate = new JFrame();
+		    	                    		empate.setSize(800,800);
+		    	                    		empate.getContentPane().add(emp);
+		    	                    		empate.setLocationRelativeTo(null);
+		    	                    		empate.setVisible(true);
+		    	                    		empate.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		                            		try {
+		        								escreverFile();
+		        							} catch (IOException e1) {
+		        								// TODO Auto-generated catch block
+		        								e1.printStackTrace();
+		        							}
+		                            	}
+		                            	else {
+		                            		JOptionPane.showMessageDialog(null,"O pedido de empate foi recusado","Proposta de empate",JOptionPane.WARNING_MESSAGE);
+		                            	}
+                            	}
+                            }
+                            	System.out.println(jogo.faltaPeças(tabuleiro));
+                            if(jogo.faltaPeças(jogo.tabuleiro)) {
+                            	empate = new JFrame();
+	                    		empate.setSize(800,800);
+	                    		empate.getContentPane().add(emp);
+	                    		empate.setLocationRelativeTo(null);
+	                    		empate.setVisible(true);
+	                    		empate.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                            }
                            if(jogo.xequematedetect(tabuleiro, jogo.turno.isLadobranco()))
                        		{
                        		
@@ -240,14 +287,19 @@ public class Gui extends JFrame{
                     		lado = 2;
                     	int input = JOptionPane.showConfirmDialog(null,"O Jogador "+lado+" propos empate! Deseja aceitar ?","Proposta de empate",JOptionPane.YES_NO_OPTION);
                     	if(input == 0) {
-                    		JOptionPane.showMessageDialog(null,"Jogo terminou em empate!","Empate",JOptionPane.INFORMATION_MESSAGE);
+                    		empate = new JFrame();
+                    		empate.setSize(800,800);
+                    		empate.getContentPane().add(emp);
+                    		empate.setLocationRelativeTo(null);
+                    		empate.setVisible(true);
+                    		empate.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                     		try {
 								escreverFile();
 							} catch (IOException e1) {
 								// TODO Auto-generated catch block
 								e1.printStackTrace();
 							}
-                    		System.exit(0);
+                    		//System.exit(0);
                     	}
                     	else {
                     		JOptionPane.showMessageDialog(null,"O pedido de empate foi recusado","Proposta de empate",JOptionPane.WARNING_MESSAGE);
