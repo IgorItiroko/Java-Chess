@@ -33,7 +33,7 @@ public class Menu {
             mm = new JFrame();
             mm.add(menuInicial);
             mm.setLayout(new FlowLayout());
-            mm.setVisible(false);
+            //mm.setVisible(false);
             mm.setSize(600,645);
             mm.setLocationRelativeTo(null);
             mm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

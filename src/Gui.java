@@ -1,6 +1,4 @@
 
-import java.awt.Point;
-
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
@@ -16,8 +14,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
-
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.JTextPane;
 
 import java.util.Scanner;
 
@@ -38,7 +38,7 @@ public class Gui extends JFrame{
     public static int sXf;
     public static int sYf;
     public static Scanner leFile;
-    private static Jogador[] jogadores = new Jogador[2];
+    private static Jogador[] jogadores = new Jogador[4];
     private static Jogo jogo;
     public static JFrame tabuleiroF;
     public Tabuleiro tabuleiro;
@@ -64,13 +64,28 @@ public class Gui extends JFrame{
     ImageIcon rainhaC = new ImageIcon(getClass().getResource("images/cachorroRainha.png"));
     ImageIcon select = new ImageIcon(getClass().getResource("images/fundoSelecao.png"));
     ImageIcon pselect = new ImageIcon(getClass().getResource("images/fundoPossibilidade.png"));
-    public JLabel Peças[] = new JLabel[32];
+    public JLabel Peças[] = new JLabel[40];
     public JLabel possivelSelecao[] = new JLabel[32];
     public JLabel selection = new JLabel ();
-    public JLayeredPane layer = new JLayeredPane();    
-    
+    public JLayeredPane layer = new JLayeredPane();
+    //Simulação
+    private JFrame telaSimula;
+    public static Scanner readFile;
+    ImageIcon simulaImagem = new ImageIcon(getClass().getResource("/images/simulacaoMenu.png"));
+    JLabel simularMenu = new JLabel(simulaImagem);
+    private JTextPane jogadasSim;
+    public JFrame simulação;
+    public JLayeredPane simulaLayer = new JLayeredPane();
+    Jogo sjogo = new Jogo();
+    //Telas de Vitoria
+    ImageIcon cw = new ImageIcon(getClass().getResource("images/catWins.png"));
+    ImageIcon dw = new ImageIcon(getClass().getResource("images/dogWins.png"));
+    JFrame dogWins;
+    JFrame catWins;
+    JLabel dog = new JLabel(dw);
+    JLabel cat = new JLabel(cw);
     public void jogadasPossiveis(int x, int y) {
-    	int indx = 0;
+    	int indx = 0;    	
     	for(int i =0 ; i<32; i++) {
     		possivelSelecao[i]= new JLabel();
     	}
@@ -82,16 +97,18 @@ public class Gui extends JFrame{
         		{
         			if(tabuleiro.campo[x][y].getPeça().canMove(tabuleiro, tabuleiro.campo[x][y], tabuleiro.campo[i][j], true))
         			{
-        				jogo.construtorJogada(jogo.turno,y,x,j,i,true);
-        				if(jogo.xequedetect(tabuleiro, jogo.turno.isLadobranco()))
+        				
+        				if(jogo.construtorJogada(jogo.turno,y,x,j,i,true))
         				{
         					jogo.desfazerJogada(jogo.ultimoMovimento);
+        				
         				}
         				else
         				{
         					jogo.desfazerJogada(jogo.ultimoMovimento);
         					if(jogo.turno.isLadobranco() == tabuleiro.campo[x][y].getPeça().isBranca()) {
         						System.out.println(i + " " + j);
+        						//Imagem das possíveis jogadas
             					possivelSelecao[indx].setIcon(pselect);
             					possivelSelecao[indx].setBounds(j*65,i*65,64,64);
             					layer.add(possivelSelecao[indx],JLayeredPane.PALETTE_LAYER);
@@ -151,6 +168,8 @@ public class Gui extends JFrame{
                         Yi = (int) (cord.y - 33) / 64;
                         System.out.println(cord.x+","+cord.y);
                         System.out.println("X,Y Inicial:" +Xi+","+Yi);
+                        
+                        //Imagem do Seletor
                         selection.setIcon(select);
                         selection.setBounds(Xi*65,Yi*65,64,64);
                         layer.add(selection,JLayeredPane.PALETTE_LAYER);
@@ -176,19 +195,34 @@ public class Gui extends JFrame{
                         	mudancaTurno.setText("Turno do \n" + jogo.turno.nome);
                         	codigos.add(jogo.codificaJogada(Xi,Yi,Xf,Yf));
                             Tabuleiro.printTabuleiro();
-                           iniciarTabuleiro(false);
+                            iniciarTabuleiro(false);
+                            
                            if(jogo.xequematedetect(tabuleiro, jogo.turno.isLadobranco()))
                        		{
-                       		boolean lado1 = jogo.turno.isLadobranco();
+                       		
                        		jogo.mudaTurno();
-                       		p = jogo.turno.getNome();
-                       		JOptionPane.showMessageDialog(null, p + " ganhou!","Fim de jogo!",JOptionPane.PLAIN_MESSAGE);
+                       		if(!jogo.turno.isLadobranco()) {
+	                    		dogWins = new JFrame();
+	                    		dogWins.setSize(800,800);
+	                    		dogWins.getContentPane().add(dog);
+	                    		dogWins.setLocationRelativeTo(null);
+	                    		dogWins.setVisible(true);
+	                    		dogWins.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                       		}
+                       		else
+                       		{
+                       			catWins = new JFrame();
+	                    		catWins.setSize(800,800);
+	                    		catWins.getContentPane().add(cat);
+	                    		catWins.setLocationRelativeTo(null);
+	                    		catWins.setVisible(true);
+	                    		catWins.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                       		}
                        		try {
 								escreverFile();
 							} catch (IOException e1) {
 								e1.printStackTrace();
 							}
-                       		System.exit(0);
                        		}
                         }
                         scan = true;
@@ -226,27 +260,37 @@ public class Gui extends JFrame{
 	                    	if(jogo.turno.isLadobranco())
 	                    	{
 	                    		System.out.println("O jogador do lado preto ganhou!");
-	                    		JOptionPane.showMessageDialog(null, "O Jogador do lado preto ganhou!","Fim de jogo!",JOptionPane.PLAIN_MESSAGE);
+	                    		dogWins = new JFrame();
+	                    		dogWins.setSize(800,800);
+	                    		dogWins.getContentPane().add(dog);
+	                    		dogWins.setLocationRelativeTo(null);
+	                    		dogWins.setVisible(true);
+	                    		dogWins.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	                    		try {
 									escreverFile();
 								} catch (IOException e1) {
 									// TODO Auto-generated catch block
 									e1.printStackTrace();
 								}
-	                    		System.exit(0);
+	                    	
 	                    		
 	                    	}
 	                    	else
 	                    	{
 	                    		System.out.println("O jogador do lado branco ganhou!");
-	                    	JOptionPane.showMessageDialog(null, "O Jogador do lado branco ganhou!","Fim de jogo!",JOptionPane.PLAIN_MESSAGE);
+	                    		catWins = new JFrame();
+	                    		catWins.setSize(800,800);
+	                    		catWins.getContentPane().add(cat);
+	                    		catWins.setLocationRelativeTo(null);
+	                    		catWins.setVisible(true);
+	                    		catWins.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	                    	try {
 								escreverFile();
 							} catch (IOException e1) {
 								// TODO Auto-generated catch block
 								e1.printStackTrace();
 							}
-                    		System.exit(0);
+	                    	
 	                    	}
 	                    }
 	                
@@ -277,12 +321,8 @@ public class Gui extends JFrame{
 		                    
 		                    // Simular ultimo jogo
 		                    if((cord.x > 555 && cord.x < 706) && (cord.y > 472 && cord.y < 520))
-		                    {	                    	
-		                    	try {		                    	
-									simularJogo(jogo);
-								} catch (FileNotFoundException e1) {
-									e1.printStackTrace();
-								}
+		                    {
+		                    	initialize();
 		                    }
 
                 }
@@ -291,8 +331,112 @@ public class Gui extends JFrame{
             
         }
     
-  
-    	
+    private void initialize() {
+        int n = 1;
+        telaSimula = new JFrame();
+        simulaLayer.setBounds(0,0,735,564);
+        simulaLayer.add(simularMenu,JLayeredPane.DEFAULT_LAYER);
+        getContentPane().add(simulaLayer);
+        
+        telaSimula.setBounds(0, 0, 735, 564);
+        telaSimula.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        telaSimula.getContentPane().setLayout(null);
+        telaSimula.setVisible(true);
+        
+
+        jogadasSim = new JTextPane();
+        jogadasSim.setBounds(538, 94, 160, 304);
+        jogadasSim.setForeground(new Color(88, 88, 88));
+        jogadasSim.setBackground(new Color(239, 228, 176));
+        telaSimula.getContentPane().add(jogadasSim);
+        telaSimula.setLocationRelativeTo(null);
+        
+        
+        try {
+            readFile = new Scanner(new File("ultimoJogo.txt"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        while(readFile.hasNext())
+        {
+            jogadasSim.setText((jogadasSim.getText() + n + ". " + readFile.next() + " " + readFile.next() + "\n"));        
+            n++;
+        }
+        jogadasSim.setEditable(false);
+        JPanel container = new JPanel();
+        container.add(jogadasSim);
+        JScrollPane scrollBar = new JScrollPane(container,
+                JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollBar.getViewport().getView().setBackground(new Color(239, 228, 176));
+        scrollBar.getViewport().getView().setFont(new Font("SansSerif", Font.PLAIN, 30));
+        scrollBar.getViewport().getView().setForeground(new Color(88,88,88));
+        scrollBar.setBounds(540, 94, 150, 300);
+        telaSimula.getContentPane().add(scrollBar);
+        simularMenu.setBounds(0, 0, 719, 525);
+        telaSimula.getContentPane().add(simulaLayer);
+        
+        	////
+       
+        jogadores[2] = new Jogador(true);
+        jogadores[3] = new Jogador(false);
+       // sjogo.tabuleiro.resetTabuleiro();
+        
+        sjogo.iniciar(jogadores[2],jogadores[3] );
+        simulaInicia(true);
+        
+        try {
+            leFile = new Scanner(new File("ultimoJogo.txt"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        telaSimula.addMouseListener(new MouseAdapter (){
+        	public void mousePressed(MouseEvent h) {
+        		Point p = h.getPoint();
+        		 System.out.println(p.x + "," + p.y);
+        		 if((p.x > 550 && p.y > 450)&&(p.x < 700 && p.y <508)) {
+        			 if(leFile.hasNext()) {
+        			 
+        			 String qinicial = leFile.next();
+                     switch(qinicial.charAt(0))
+                     {
+                         case 'a': {sXi = 0; break;} 
+                         case 'b': {sXi = 1; break;}
+                         case 'c': {sXi = 2; break;}
+                         case 'd': {sXi = 3; break;}
+                         case 'e': {sXi = 4; break;}
+                         case 'f': {sXi = 5; break;}
+                         case 'g': {sXi = 6; break;}
+                         case 'h': {sXi = 7; break;}
+                     }
+                     sYi = Character.getNumericValue(qinicial.charAt(1));
+
+                     String qfinal = leFile.next();
+                     switch(qfinal.charAt(0))
+                     {
+                     case 'a': {sXf = 0; break;} 
+                     case 'b': {sXf = 1; break;}
+                     case 'c': {sXf = 2; break;}
+                     case 'd': {sXf = 3; break;}
+                     case 'e': {sXf = 4; break;}
+                     case 'f': {sXf = 5; break;}
+                     case 'g': {sXf = 6; break;}
+                     case 'h': {sXf = 7; break;}
+                     }
+                     sYf = Character.getNumericValue(qfinal.charAt(1));
+
+                     
+                     sjogo.pulaCanMove(sYi, sXi, sYf, sXf);
+                     simulaInicia(false);
+                     telaSimula.getContentPane().validate();
+                     telaSimula.getContentPane().repaint();
+        			 
+        		 }
+        	}
+        	}
+        	
+        });
+    }
         public void iniciarTabuleiro(boolean op) {
         	int indx = 0;
         	
@@ -532,60 +676,245 @@ public class Gui extends JFrame{
         	}
         	   
         }
-        public void simularJogo(Jogo jogo) throws FileNotFoundException
-        {
-        	System.out.println("A");
-        	jogo.tabuleiro.resetTabuleiro();
-        	iniciarTabuleiro(false);
+        public void simulaInicia(boolean op) {
+        	int indx=0;
+        	for(int i =0 ; i<32; i++) {
+        		Peças[i]= new JLabel();
+        	}
         	
-        	
-        	try {
-    			leFile = new Scanner(new File("ultimoJogo.txt"));
-    		} catch (FileNotFoundException e) {
-    			e.printStackTrace();
-    		}
-        	
-        	while(leFile.hasNext())
-        	{
+        	if(op) {
+        	   for(int i = 0; i<8; i++) {
+           		for(int j=0; j<8 ; j++) {
+           			if(sjogo.tabuleiro.campo[i][j].getPeça()!= null) {
+           				{
+           					 if(sjogo.tabuleiro.campo[i][j].getPeça().isBranca()) {
+           						 
+           						 if(sjogo.tabuleiro.campo[i][j].getPeça().getIdentidade() == 1) {
+           		        				
+           		        				Peças[indx].setIcon(pG);
+           		        				Peças[indx].setBounds(j*64,i*67, 64, 64);
+           		        				simulaLayer.add(Peças[indx],JLayeredPane.MODAL_LAYER);
+           		        				indx ++;
+           							 
+           						 }
+           						 if(sjogo.tabuleiro.campo[i][j].getPeça().getIdentidade() == 2) {
+           							
+        		        				Peças[indx].setIcon(tG);
+        		        				Peças[indx].setBounds(j*64,i*67, 64, 64);
+        		        				simulaLayer.add(Peças[indx],JLayeredPane.MODAL_LAYER);
+        		        				indx ++;
+           						 }
+           						 
+           						 if(sjogo.tabuleiro.campo[i][j].getPeça().getIdentidade() == 3) {
+           							
+        		        				Peças[indx].setIcon(cG);
+        		        				Peças[indx].setBounds(j*64,i*67, 64, 64);
+        		        				simulaLayer.add(Peças[indx],JLayeredPane.MODAL_LAYER);
+        		        				indx ++;
+           							 
+           						 }
+           						 
+           						 if(sjogo.tabuleiro.campo[i][j].getPeça().getIdentidade() == 4) {
+           							
+        		        				Peças[indx].setIcon(bG);
+        		        				Peças[indx].setBounds(j*64,i*67, 64, 64);
+        		        				simulaLayer.add(Peças[indx],JLayeredPane.MODAL_LAYER);
+        		        				indx ++;
+           							 
+           						 }
+           						 if(sjogo.tabuleiro.campo[i][j].getPeça().getIdentidade() == 5) {
+           							 
+        		        				Peças[indx].setIcon(reiG);
+        		        				Peças[indx].setBounds(j*64,i*67, 64, 64);
+        		        				simulaLayer.add(Peças[indx],JLayeredPane.MODAL_LAYER);
+        		        				indx ++;
+           							 
+           						 }
+           						 if(sjogo.tabuleiro.campo[i][j].getPeça().getIdentidade() == 6) {
+           							 
+        		        				Peças[indx].setIcon(rainhaG);
+        		        				Peças[indx].setBounds(j*64,i*67, 64, 64);
+        		        				simulaLayer.add(Peças[indx],JLayeredPane.MODAL_LAYER);
+        		        				indx ++;
+           							 
+           						 }
+           					 }
+           					 else {
+           						 if(sjogo.tabuleiro.campo[i][j].getPeça().getIdentidade() == 1) {
+        		        				
+        		        				Peças[indx].setIcon(pC);
+        		        				Peças[indx].setBounds(j*64,i*66, 64, 64);
+        		        				simulaLayer.add(Peças[indx],JLayeredPane.MODAL_LAYER);
+        		        				indx ++;
+        							 
+        						 }
+        						 if(sjogo.tabuleiro.campo[i][j].getPeça().getIdentidade() == 2) {
+        							
+     		        				Peças[indx].setIcon(tC);
+     		        				Peças[indx].setBounds(j*64,i*66, 64, 64);
+     		        				simulaLayer.add(Peças[indx],JLayeredPane.MODAL_LAYER);
+     		        				indx ++;
+        						 }
+        						 
+        						 if(sjogo.tabuleiro.campo[i][j].getPeça().getIdentidade() == 3) {
+        							
+     		        				Peças[indx].setIcon(cC);
+     		        				Peças[indx].setBounds(j*64,i*66, 64, 64);
+     		        				simulaLayer.add(Peças[indx],JLayeredPane.MODAL_LAYER);
+     		        				indx ++;
+        							 
+        						 }
+        						 
+        						 if(sjogo.tabuleiro.campo[i][j].getPeça().getIdentidade() == 4) {
+        							 
+     		        				Peças[indx].setIcon(bC);
+     		        				Peças[indx].setBounds(j*64,i*66, 64, 64);
+     		        				simulaLayer.add(Peças[indx],JLayeredPane.MODAL_LAYER);
+     		        				indx ++;
+        							 
+        						 }
+        						 if(sjogo.tabuleiro.campo[i][j].getPeça().getIdentidade() == 5) {
+        							
+     		        				Peças[indx].setIcon(reiC);
+     		        				Peças[indx].setBounds(j*64,i*66, 64, 64);
+     		        				simulaLayer.add(Peças[indx],JLayeredPane.MODAL_LAYER);
+     		        				indx ++;
+        							 
+        						 }
+        						 if(sjogo.tabuleiro.campo[i][j].getPeça().getIdentidade() == 6) {
+        							
+     		        				Peças[indx].setIcon(rainhaC);
+     		        				Peças[indx].setBounds(j*64,i*66, 64, 64);
+     		        				simulaLayer.add(Peças[indx],JLayeredPane.MODAL_LAYER);
+     		        				indx ++;
+        							 
+        						 }
+           						 
+           					 }
+           				}
+           			}
+           		}
+           	}
+        }
+        	else {
+        		simulaLayer.removeAll();       		
+            	simulaLayer.add(simularMenu,JLayeredPane.DEFAULT_LAYER);
+            	
+        	  	   for(int i = 0; i<8; i++) {
+                  		for(int j=0; j<8 ; j++) {
+                  			if(sjogo.tabuleiro.campo[i][j].getPeça()!= null) {
+                  				{
+                  					 if(sjogo.tabuleiro.campo[i][j].getPeça().isBranca()) {
+                  						 
+                  						 if(sjogo.tabuleiro.campo[i][j].getPeça().getIdentidade() == 1) {
+                  		        				
+                  		        				Peças[indx].setIcon(pG);
+                  		        				Peças[indx].setBounds(j*64,i*67, 64, 64);
+                  		        				simulaLayer.add(Peças[indx],JLayeredPane.MODAL_LAYER);
+                  		        				indx ++;
+                  							 
+                  						 }
+                  						 if(sjogo.tabuleiro.campo[i][j].getPeça().getIdentidade() == 2) {
+                  							
+               		        				Peças[indx].setIcon(tG);
+               		        				Peças[indx].setBounds(j*64,i*67, 64, 64);
+               		        				simulaLayer.add(Peças[indx],JLayeredPane.MODAL_LAYER);
+               		        				indx ++;
+                  						 }
+                  						 
+                  						 if(sjogo.tabuleiro.campo[i][j].getPeça().getIdentidade() == 3) {
+                  							
+               		        				Peças[indx].setIcon(cG);
+               		        				Peças[indx].setBounds(j*64,i*67, 64, 64);
+               		        				simulaLayer.add(Peças[indx],JLayeredPane.MODAL_LAYER);
+               		        				indx ++;
+                  							 
+                  						 }
+                  						 
+                  						 if(sjogo.tabuleiro.campo[i][j].getPeça().getIdentidade() == 4) {
+                  							
+               		        				Peças[indx].setIcon(bG);
+               		        				Peças[indx].setBounds(j*64,i*67, 64, 64);
+               		        				simulaLayer.add(Peças[indx],JLayeredPane.MODAL_LAYER);
+               		        				indx ++;
+                  							 
+                  						 }
+                  						 if(sjogo.tabuleiro.campo[i][j].getPeça().getIdentidade() == 5) {
+                  							 
+               		        				Peças[indx].setIcon(reiG);
+               		        				Peças[indx].setBounds(j*64,i*67, 64, 64);
+               		        				simulaLayer.add(Peças[indx],JLayeredPane.MODAL_LAYER);
+               		        				indx ++;
+                  							 
+                  						 }
+                  						 if(sjogo.tabuleiro.campo[i][j].getPeça().getIdentidade() == 6) {
+                  							 
+               		        				Peças[indx].setIcon(rainhaG);
+               		        				Peças[indx].setBounds(j*64,i*67, 64, 64);
+               		        				simulaLayer.add(Peças[indx],JLayeredPane.MODAL_LAYER);
+               		        				indx ++;
+                  							 
+                  						 }
+                  					 }
+                  					 else {
+                  						 if(sjogo.tabuleiro.campo[i][j].getPeça().getIdentidade() == 1) {
+               		        				
+               		        				Peças[indx].setIcon(pC);
+               		        				Peças[indx].setBounds(j*64,i*66, 64, 64);
+               		        				simulaLayer.add(Peças[indx],JLayeredPane.MODAL_LAYER);
+               		        				indx ++;
+               							 
+               						 }
+               						 if(sjogo.tabuleiro.campo[i][j].getPeça().getIdentidade() == 2) {
+               							
+            		        				Peças[indx].setIcon(tC);
+            		        				Peças[indx].setBounds(j*64,i*66, 64, 64);
+            		        				layer.add(Peças[indx],JLayeredPane.MODAL_LAYER);
+            		        				indx ++;
+               						 }
+               						 
+               						 if(sjogo.tabuleiro.campo[i][j].getPeça().getIdentidade() == 3) {
+               							
+            		        				Peças[indx].setIcon(cC);
+            		        				Peças[indx].setBounds(j*64,i*66, 64, 64);
+            		        				simulaLayer.add(Peças[indx],JLayeredPane.MODAL_LAYER);
+            		        				indx ++;
+               							 
+               						 }
+               						 
+               						 if(sjogo.tabuleiro.campo[i][j].getPeça().getIdentidade() == 4) {
+               							 
+            		        				Peças[indx].setIcon(bC);
+            		        				Peças[indx].setBounds(j*64,i*66, 64, 64);
+            		        				simulaLayer.add(Peças[indx],JLayeredPane.MODAL_LAYER);
+            		        				indx ++;
+               							 
+               						 }
+               						 if(sjogo.tabuleiro.campo[i][j].getPeça().getIdentidade() == 5) {
+               							
+            		        				Peças[indx].setIcon(reiC);
+            		        				Peças[indx].setBounds(j*64,i*66, 64, 64);
+            		        				simulaLayer.add(Peças[indx],JLayeredPane.MODAL_LAYER);
+            		        				indx ++;
+               							 
+               						 }
+               						 if(sjogo.tabuleiro.campo[i][j].getPeça().getIdentidade() == 6) {
+               							
+            		        				Peças[indx].setIcon(rainhaC);
+            		        				Peças[indx].setBounds(j*64,i*66, 64, 64);
+            		        				simulaLayer.add(Peças[indx],JLayeredPane.MODAL_LAYER);
+            		        				indx ++;
+               							 
+               						 }
+                  						 
+                  					 }
+                  				}
+                  			}
+                  		}
+                  	}
+        	  	 telaSimula.getContentPane().add(simulaLayer);       	       	  	
+        	}
+    	  
+        }
 
-        		String qinicial = leFile.next();
-        		switch(qinicial.charAt(0))
-        		{
-    	    		case 'a': {sXi = 0; break;} 
-    	    		case 'b': {sXi = 1; break;}
-    	    		case 'c': {sXi = 2; break;}
-    	    		case 'd': {sXi = 3; break;}
-    	    		case 'e': {sXi = 4; break;}
-    	    		case 'f': {sXi = 5; break;}
-    	    		case 'g': {sXi = 6; break;}
-    	    		case 'h': {sXi = 7; break;}
-        		}
-        		sYi = Character.getNumericValue(qinicial.charAt(1));
-        		
-        		String qfinal = leFile.next();
-        		switch(qfinal.charAt(0))
-        		{
-        		case 'a': {sXf = 0; break;} 
-        		case 'b': {sXf = 1; break;}
-        		case 'c': {sXf = 2; break;}
-        		case 'd': {sXf = 3; break;}
-        		case 'e': {sXf = 4; break;}
-        		case 'f': {sXf = 5; break;}
-        		case 'g': {sXf = 6; break;}
-        		case 'h': {sXf = 7; break;}
-        		}
-        		sYf = Character.getNumericValue(qfinal.charAt(1));
-        		
-        		
-        		jogo.pulaCanMove(sYi, sXi, sYf, sXf);
-        		iniciarTabuleiro(false);
-        		
-    			try {
-    					Thread.sleep(500);
-    				} catch (InterruptedException e) {
-    					e.printStackTrace();
-    				}
-        	}
-       		JOptionPane.showMessageDialog(null, "Fim da simulação","Fim de jogo!",JOptionPane.PLAIN_MESSAGE);	
-        	}
     }

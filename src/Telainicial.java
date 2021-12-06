@@ -89,7 +89,7 @@ public class Telainicial{
         inserirNome1.setForeground(Color.decode("#585858"));
         
         JLabel label = new JLabel("");
-        label.setToolTipText("Insira o nome do jogador  2");
+       //label.setToolTipText("Insira o nome do jogador  2");
         label.setBounds(0, 0, 632, 619);
         label.setIcon(img);
         frame.getContentPane().add(label);
