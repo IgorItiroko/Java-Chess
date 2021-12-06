@@ -14,6 +14,7 @@ public class Jogo{
 	public Telainicial tela;
 	public Mov ultimoMovimento;
 	public int escolhaP = 0;
+	public int movimento = 0;
 	
 	void iniciar(Jogador j1, Jogador j2)
 	{
@@ -431,6 +432,7 @@ public class Jogo{
         this.ultimoMovimento = move;
         ultimoMovimento.setPmov(ultimoMovimento.getIni().getPeça());
         ultimoMovimento.setPmorta(ultimoMovimento.getFim().getPeça());
+       
         return this.Jogada(move,j1,verific);
     }
 	
@@ -512,6 +514,22 @@ public class Jogo{
         }
 		
         promovePeao(!this.turno.isLadobranco());
+        
+        
+        if(!verific) {
+        	
+        	if(this.tabuleiro.campo[move.getIni().getX()][move.getIni().getY()].getPeça() != null) {
+        	if(this.tabuleiro.campo[move.getIni().getX()][move.getIni().getY()].getPeça().getIdentidade() == 1) {
+        		movimento =0;
+        	}
+        	if(this.tabuleiro.campo[move.getFim().getX()][move.getFim().getY()].getPeça() != null) {
+        		movimento = 0;
+        	}
+        	
+        		}
+        	movimento ++;
+        	}
+        
         return true;
 
         
