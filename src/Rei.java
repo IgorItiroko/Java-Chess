@@ -23,7 +23,8 @@ public class Rei extends Peça {
 		
 			if(!pm) {
 				this.primeiroM = false;
-			}		
+			}
+			
 		return true;
 	}
 	

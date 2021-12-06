@@ -19,19 +19,22 @@ public class Peão extends Peça{
 			if(x >2) {
 			return false;
 			}
+
+			if(tabuleiro.campo[fim.getX()][fim.getY()].getPeça()!= null && inicio.getY() == fim.getY()) {
+				return false;
+			}
 			if(this.isBranca()) {
-				if(tabuleiro.campo[inicio.getX()+1][inicio.getY()].getPeça()!= null) {
+				if(tabuleiro.campo[inicio.getX() + 2][fim.getY()].getPeça()!= null && tabuleiro.campo[inicio.getX() + 2][fim.getY()].getPeça().isBranca() == !this.isBranca() ) {
 					return false;
 				}
 			}
 			if(!this.isBranca()) {
-				if(tabuleiro.campo[inicio.getX()-1][inicio.getY()].getPeça()!= null) {
+				if(tabuleiro.campo[inicio.getX() - 2][fim.getY()].getPeça()!= null && tabuleiro.campo[inicio.getX() -2][fim.getY()].getPeça().isBranca() == !this.isBranca() ) {
 					return false;
 				}
+				
 			}
-			if(inicio.getY() != fim.getY()) {
-				return false;
-			}
+			
 		}
 		
 		//proibe de mover a peça mais do que 1 caso não seja o primeiro movimento
