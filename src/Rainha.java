@@ -1,10 +1,10 @@
 
 public class Rainha extends Peça {
 	public int identidade;
+	/// Construtor
 	public Rainha (boolean branca, int identidade,boolean primeiroM) {
 		 super(branca,identidade,primeiroM);
 	}
-	public Quadrado fRainha;
 	
 	public boolean canMove(Tabuleiro tabuleiro,Quadrado inicio,Quadrado fim,boolean pm) {
 		
@@ -63,7 +63,7 @@ public class Rainha extends Peça {
 				
 				if(direção.equals("sudeste")) {				
 					for(int i=1; i<x ; i++) {
-							if(tabuleiro.campo[inicio.getX()+i][inicio.getY()+i].getPeça() !=null) {
+							if(Tabuleiro.campo[inicio.getX()+i][inicio.getY()+i].getPeça() !=null) {
 								return false;
 							}
 					}
@@ -71,21 +71,21 @@ public class Rainha extends Peça {
 					
 				if(direção.equals("nordeste")) {				
 					for(int i=1; i<x ; i++) {
-							if(tabuleiro.campo[inicio.getX()-i][inicio.getY()+i].getPeça() !=null) {
+							if(Tabuleiro.campo[inicio.getX()-i][inicio.getY()+i].getPeça() !=null) {
 								return false;
 							}
 					}
 				}
 				if(direção.equals("noroeste")) {				
 					for(int i=1; i<x ; i++) {
-							if(tabuleiro.campo[inicio.getX()+i][inicio.getY()-i].getPeça() !=null) {
+							if(Tabuleiro.campo[inicio.getX()+i][inicio.getY()-i].getPeça() !=null) {
 								return false;
 							}
 					}
 				}
 				if(direção.equals("sudoeste")) {				
 					for(int i=1; i<x ; i++) {
-							if(tabuleiro.campo[inicio.getX()-i][inicio.getY()-i].getPeça() !=null) {
+							if(Tabuleiro.campo[inicio.getX()-i][inicio.getY()-i].getPeça() !=null) {
 								return false;
 							}
 					}
@@ -117,7 +117,7 @@ public class Rainha extends Peça {
 			if(direção.equals("sul")) {
 				int movimento = Math.abs(fim.getX() - inicio.getX());
 				for(int i=1; i<movimento ;i++) {
-					if(tabuleiro.campo[inicio.getX()+i][inicio.getY()].getPeça()!=null) {
+					if(Tabuleiro.campo[inicio.getX()+i][inicio.getY()].getPeça()!=null) {
 						return false;
 					}				
 				}
@@ -126,7 +126,7 @@ public class Rainha extends Peça {
 			if(direção.equals("norte")) {
 				int movimento = Math.abs(fim.getX() - inicio.getX());
 				for(int i=1; i<movimento ;i++) {
-					if(tabuleiro.campo[inicio.getX()-i][inicio.getY()].getPeça()!=null) {
+					if(Tabuleiro.campo[inicio.getX()-i][inicio.getY()].getPeça()!=null) {
 						return false;
 					}				
 				}
@@ -135,7 +135,7 @@ public class Rainha extends Peça {
 			if(direção.equals("leste")) {
 				int movimento = Math.abs(fim.getY() - inicio.getY());
 				for(int i=1; i<movimento ;i++) {
-					if(tabuleiro.campo[inicio.getX()][inicio.getY()+i].getPeça()!=null) {
+					if(Tabuleiro.campo[inicio.getX()][inicio.getY()+i].getPeça()!=null) {
 						return false;
 					}				
 				}
@@ -144,7 +144,7 @@ public class Rainha extends Peça {
 			if(direção.equals("oeste")) {
 				int movimento = Math.abs(fim.getY() - inicio.getY());
 				for(int i=1; i<movimento ;i++) {
-					if(tabuleiro.campo[inicio.getX()][inicio.getY()-i].getPeça()!=null) {
+					if(Tabuleiro.campo[inicio.getX()][inicio.getY()-i].getPeça()!=null) {
 						return false;
 					}				
 				}

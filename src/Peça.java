@@ -5,13 +5,15 @@ public abstract class Peça {
 	public boolean primeiroM = true;
 	public int identidade;
 	
-	
+	/// Construtor
 	public Peça(boolean branca,int identidade,boolean primeiroM)
 	{
 		this.setBranca(branca);
 		this.identidade = identidade;
 		this.primeiroM= true;
 	}
+	
+	/// getters and setters
 	public int getIdentidade() {
 		return identidade;
 	}
@@ -41,6 +43,7 @@ public abstract class Peça {
 		this.viva = viva;
 	}
 	
+	/// Função que diz se uma peça pode ou não se mexer.
 	public abstract boolean canMove(Tabuleiro tabuleiro,Quadrado inicio,Quadrado fim,boolean pm);
 	
 	

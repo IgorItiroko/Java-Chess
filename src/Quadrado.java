@@ -4,6 +4,7 @@ public class Quadrado {
 	private int x;
 	private int y;
 	
+	/// Construtor
 	public Quadrado(int x, int y, Peça peça)
 	{
 		this.setX(x);
@@ -11,6 +12,7 @@ public class Quadrado {
 		this.setPeça(peça);
 	}
 	
+	/// getters and setters
 	public void setPeça(Peça p)
 	{
 		this.peça = p;

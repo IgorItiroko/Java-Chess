@@ -5,6 +5,7 @@ import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 public class Jogo{
+	@SuppressWarnings("rawtypes")
 	public JComboBox opções;
 	public Tabuleiro tabuleiro;
 	public static Jogador[] jogadores = new Jogador[2];
@@ -14,8 +15,10 @@ public class Jogo{
 	public Telainicial tela;
 	public Mov ultimoMovimento;
 	public int escolhaP = 0;
-	public int movimento = 0;
+	public int movimentoj2 = 0;
+	public int movimentoj1 = 0;
 	
+	/// Inicializa um jogo, com o tabuleiro, e os jogadores.
 	void iniciar(Jogador j1, Jogador j2)
 	{
 		jogadores[0] = j1;
@@ -28,6 +31,8 @@ public class Jogo{
 			this.turno = j2;
 		}
 	}
+	
+	/// Efetua uma jogada sem nenhuma confirmação, usada para polpar tempo de execução do código.
 	public void pulaCanMove(int inix, int iniy, int fimx, int fimy)
     {
         Quadrado iniPos = tabuleiro.validade(inix,iniy);
@@ -37,13 +42,15 @@ public class Jogo{
         move.getIni().setPeça(null);
     }
 
+	/// Função que promove o peão uma vez que este chega na ultima peça do tabuleiro.
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void promovePeao(boolean branco) {
 			if(branco) {
 				for(int i = 0;i<8; i++) {
-					if(tabuleiro.campo[7][i].getPeça() != null) {
-						if(tabuleiro.campo[7][i].getPeça().getIdentidade() == 1 && tabuleiro.campo[7][i].getPeça().isBranca() ) {
+					if(Tabuleiro.campo[7][i].getPeça() != null) {
+						if(Tabuleiro.campo[7][i].getPeça().getIdentidade() == 1 && Tabuleiro.campo[7][i].getPeça().isBranca() ) {
 							do {
-								Object[] optionsGC = {"<Selecione a Opção Desejada>", "Torre","Cavalo","Bispo","Rainha"}																						;
+								Object[] optionsGC = {"<Selecione a Opção Desejada>", "Torre","Cavalo","Bispo","Rainha"};						/// As opções de promoção são dadas por um JOption																	;
 							     opções = new JComboBox(optionsGC);
 							     JOptionPane.showMessageDialog(null, opções, "Selecione a peça na qual o peão se tornará.",
 							          JOptionPane.INFORMATION_MESSAGE);
@@ -77,8 +84,8 @@ public class Jogo{
 			
 			if(!branco) {
 				for(int i = 0;i<8; i++) {
-					if(tabuleiro.campo[0][i].getPeça() != null) {
-						if(tabuleiro.campo[0][i].getPeça().getIdentidade() == 1 && !tabuleiro.campo[0][i].getPeça().isBranca()) {
+					if(Tabuleiro.campo[0][i].getPeça() != null) {
+						if(Tabuleiro.campo[0][i].getPeça().getIdentidade() == 1 && !Tabuleiro.campo[0][i].getPeça().isBranca()) {
 							do {
 								Object[] optionsGC = {"<Selecione a Opção Desejada>", "Torre","Cavalo","Bispo","Rainha"}																						;
 							     opções = new JComboBox(optionsGC);
@@ -114,20 +121,22 @@ public class Jogo{
 		
 	}
 	
+	/// Condicional do empate 2
 	  public boolean faltaPeças(Tabuleiro tabuleiro)
 	    {
 	        for(int i = 0; i < 8; i++)
 	        {
 	            for(int j = 0; j < 8; j++)
 	            {
-	                if(tabuleiro.campo[i][j].getPeça() != null && tabuleiro.campo[i][j].getPeça().getIdentidade() != 5)
+	                if(Tabuleiro.campo[i][j].getPeça() != null && Tabuleiro.campo[i][j].getPeça().getIdentidade() != 5)
 	                    return false;
 	            }
 	        }
 	        return true;
 	    }
 	
-    public static boolean xequedetect(Tabuleiro tabuleiro, boolean branco)
+	  /// Detector de xeque
+    public boolean xequedetect(Tabuleiro tabuleiro, boolean branco)
     {
         if(branco == true)
         {
@@ -135,16 +144,16 @@ public class Jogo{
             {
                 for(int j = 0; j < 8; j++)
                 {
-                    if(tabuleiro.campo[i][j].getPeça() != null && (tabuleiro.campo[i][j].getPeça().getIdentidade() == 5 && tabuleiro.campo[i][j].getPeça().isBranca() == true ) )
+                    if(Tabuleiro.campo[i][j].getPeça() != null && (Tabuleiro.campo[i][j].getPeça().getIdentidade() == 5 && Tabuleiro.campo[i][j].getPeça().isBranca() == true ) )
                     {
                         for(int p = 0; p < 8; p++)
                         {
                             for(int q = 0; q < 8; q++)
                             {
-                            	if(tabuleiro.campo[p][q].getPeça() != null)
-                                    if(!tabuleiro.campo[p][q].getPeça().isBranca())
+                            	if(Tabuleiro.campo[p][q].getPeça() != null)
+                                    if(!Tabuleiro.campo[p][q].getPeça().isBranca())
                                     {	
-                                        if(tabuleiro.campo[p][q].getPeça().canMove(tabuleiro, tabuleiro.campo[p][q], tabuleiro.campo[i][j],true))
+                                        if(Tabuleiro.campo[p][q].getPeça().canMove(tabuleiro, Tabuleiro.campo[p][q], Tabuleiro.campo[i][j],true))
                                             return true;
                                     }
                             }
@@ -160,16 +169,16 @@ public class Jogo{
             {
                 for(int j = 0; j < 8; j++)
                 {
-                    if(tabuleiro.campo[i][j].getPeça() != null && (tabuleiro.campo[i][j].getPeça().getIdentidade() == 5 && !tabuleiro.campo[i][j].getPeça().isBranca() == true ) )
+                    if(Tabuleiro.campo[i][j].getPeça() != null && (Tabuleiro.campo[i][j].getPeça().getIdentidade() == 5 && !Tabuleiro.campo[i][j].getPeça().isBranca() == true ) )
                     {
                         for(int p = 0; p < 8; p++)
                         {
                             for(int q = 0; q < 8; q++)
                             {
-                            	if(tabuleiro.campo[p][q].getPeça() != null)
-                                    if(tabuleiro.campo[p][q].getPeça().isBranca())
+                            	if(Tabuleiro.campo[p][q].getPeça() != null)
+                                    if(Tabuleiro.campo[p][q].getPeça().isBranca())
                                     {	
-                                        if(tabuleiro.campo[p][q].getPeça().canMove(tabuleiro, tabuleiro.campo[p][q], tabuleiro.campo[i][j],true))
+                                        if(Tabuleiro.campo[p][q].getPeça().canMove(tabuleiro, Tabuleiro.campo[p][q], Tabuleiro.campo[i][j],true))
                                             return true;
                                     }
                             }
@@ -189,7 +198,7 @@ public class Jogo{
             {
                 for(int j = 0; j < 8; j++)
                 {
-                    if(tabuleiro.campo[i][j].getPeça() != null && tabuleiro.campo[i][j].getPeça().isBranca())
+                    if(Tabuleiro.campo[i][j].getPeça() != null && Tabuleiro.campo[i][j].getPeça().isBranca())
                     {
                         for(int p = 0; p < 8; p++)
                         {
@@ -218,7 +227,7 @@ public class Jogo{
             {
                 for(int j = 0; j < 8; j++)
                 {
-                    if(tabuleiro.campo[i][j].getPeça() != null && !tabuleiro.campo[i][j].getPeça().isBranca())
+                    if(Tabuleiro.campo[i][j].getPeça() != null && !Tabuleiro.campo[i][j].getPeça().isBranca())
                     {
                         for(int p = 0; p < 8; p++)
                         {
@@ -243,30 +252,31 @@ public class Jogo{
         }    
         return true;
     }
-
+    
+    /// Efetua o Roque
     public boolean isRoque(Tabuleiro tabuleiro, boolean branco, boolean direita) {
     	if(branco) {
     		if(direita) {
-    			if(tabuleiro.campo[0][4].getPeça() == null) {
+    			if(Tabuleiro.campo[0][4].getPeça() == null) {
     				return false;
     			}
-    			if(tabuleiro.campo[0][7].getPeça() == null) {
+    			if(Tabuleiro.campo[0][7].getPeça() == null) {
         			return false;
     			}
-    			if(tabuleiro.campo[0][4].getPeça().getIdentidade() != 5) {
+    			if(Tabuleiro.campo[0][4].getPeça().getIdentidade() != 5) {
         			return false;
     			}
-    			if(tabuleiro.campo[0][7].getPeça().getIdentidade() != 2) {
+    			if(Tabuleiro.campo[0][7].getPeça().getIdentidade() != 2) {
         			return false;
     			}
-    			if(!tabuleiro.campo[0][4].getPeça().primeiroM) {
+    			if(!Tabuleiro.campo[0][4].getPeça().primeiroM) {
     				return false;
     			}
-    			if(!tabuleiro.campo[0][7].getPeça().primeiroM) {
+    			if(!Tabuleiro.campo[0][7].getPeça().primeiroM) {
     				return false;
     			}
     			
-    			if(!tabuleiro.campo[0][7].getPeça().canMove(tabuleiro, tabuleiro.campo[0][7], tabuleiro.campo[0][5],true)) {
+    			if(!Tabuleiro.campo[0][7].getPeça().canMove(tabuleiro, Tabuleiro.campo[0][7], Tabuleiro.campo[0][5],true)) {
     				return false;
     			}
     			if(xequedetect(tabuleiro,true)) {
@@ -285,30 +295,30 @@ public class Jogo{
     			}
     			
     			pulaCanMove(0,7,0,5);
-    			tabuleiro.campo[0][5].getPeça().primeiroM = false;
-    			tabuleiro.campo[0][6].getPeça().primeiroM = false;
+    			Tabuleiro.campo[0][5].getPeça().primeiroM = false;
+    			Tabuleiro.campo[0][6].getPeça().primeiroM = false;
     		}
     		else {
-    			if(tabuleiro.campo[0][4].getPeça() == null) {
+    			if(Tabuleiro.campo[0][4].getPeça() == null) {
     				return false;
     			}
-    			if(tabuleiro.campo[0][0].getPeça() == null) {
+    			if(Tabuleiro.campo[0][0].getPeça() == null) {
         			return false;
     			}
-    			if(tabuleiro.campo[0][4].getPeça().getIdentidade() != 5) {
+    			if(Tabuleiro.campo[0][4].getPeça().getIdentidade() != 5) {
         			return false;
     			}
-    			if(tabuleiro.campo[0][0].getPeça().getIdentidade() != 2) {
+    			if(Tabuleiro.campo[0][0].getPeça().getIdentidade() != 2) {
         			return false;
     			}
-    			if(!tabuleiro.campo[0][4].getPeça().primeiroM) {
+    			if(!Tabuleiro.campo[0][4].getPeça().primeiroM) {
     				return false;
     			}
-    			if(!tabuleiro.campo[0][0].getPeça().primeiroM) {
+    			if(!Tabuleiro.campo[0][0].getPeça().primeiroM) {
     				return false;
     			}
     			
-    			if(!tabuleiro.campo[0][0].getPeça().canMove(tabuleiro, tabuleiro.campo[0][0], tabuleiro.campo[0][3],true)) {
+    			if(!Tabuleiro.campo[0][0].getPeça().canMove(tabuleiro, Tabuleiro.campo[0][0], Tabuleiro.campo[0][3],true)) {
     				return false;
     			}
     			
@@ -329,32 +339,32 @@ public class Jogo{
     			}
     			
     			pulaCanMove(0,0,0,3);
-    			tabuleiro.campo[0][3].getPeça().setPrimeiroMovimento(false);
-    			tabuleiro.campo[0][2].getPeça().setPrimeiroMovimento(false);
+    			Tabuleiro.campo[0][3].getPeça().setPrimeiroMovimento(false);
+    			Tabuleiro.campo[0][2].getPeça().setPrimeiroMovimento(false);
     		}
     	}
     	else {
     		if(direita) {
-    			if(tabuleiro.campo[7][4].getPeça() == null) {
+    			if(Tabuleiro.campo[7][4].getPeça() == null) {
     				return false;
     			}
-    			if(tabuleiro.campo[7][7].getPeça() == null) {
+    			if(Tabuleiro.campo[7][7].getPeça() == null) {
         			return false;
     			}
-    			if(tabuleiro.campo[7][4].getPeça().getIdentidade() != 5) {
+    			if(Tabuleiro.campo[7][4].getPeça().getIdentidade() != 5) {
         			return false;
     			}
-    			if(tabuleiro.campo[7][7].getPeça().getIdentidade() != 2) {
+    			if(Tabuleiro.campo[7][7].getPeça().getIdentidade() != 2) {
         			return false;
     			}
-    			if(!tabuleiro.campo[7][4].getPeça().primeiroM) {
+    			if(!Tabuleiro.campo[7][4].getPeça().primeiroM) {
     				return false;
     			}
-    			if(!tabuleiro.campo[7][7].getPeça().primeiroM) {
+    			if(!Tabuleiro.campo[7][7].getPeça().primeiroM) {
     				return false;
     			}
     			
-    			if(!tabuleiro.campo[7][7].getPeça().canMove(tabuleiro, tabuleiro.campo[7][7], tabuleiro.campo[7][5],true)) {
+    			if(!Tabuleiro.campo[7][7].getPeça().canMove(tabuleiro, Tabuleiro.campo[7][7], Tabuleiro.campo[7][5],true)) {
     				return false;
     			}
     			
@@ -375,30 +385,30 @@ public class Jogo{
     			}
     			
     			pulaCanMove(7,7,7,5);
-    			tabuleiro.campo[7][5].getPeça().primeiroM = false;
-    			tabuleiro.campo[7][6].getPeça().primeiroM = false;
+    			Tabuleiro.campo[7][5].getPeça().primeiroM = false;
+    			Tabuleiro.campo[7][6].getPeça().primeiroM = false;
     		}
     		else {
-    			if(tabuleiro.campo[7][4].getPeça() == null) {
+    			if(Tabuleiro.campo[7][4].getPeça() == null) {
     				return false;
     			}
-    			if(tabuleiro.campo[7][0].getPeça() == null) {
+    			if(Tabuleiro.campo[7][0].getPeça() == null) {
         			return false;
     			}
-    			if(tabuleiro.campo[7][4].getPeça().getIdentidade() != 5) {
+    			if(Tabuleiro.campo[7][4].getPeça().getIdentidade() != 5) {
         			return false;
     			}
-    			if(tabuleiro.campo[7][0].getPeça().getIdentidade() != 2) {
+    			if(Tabuleiro.campo[7][0].getPeça().getIdentidade() != 2) {
         			return false;
     			}
-    			if(!tabuleiro.campo[7][4].getPeça().primeiroM) {
+    			if(!Tabuleiro.campo[7][4].getPeça().primeiroM) {
     				return false;
     			}
-    			if(!tabuleiro.campo[7][0].getPeça().primeiroM) {
+    			if(!Tabuleiro.campo[7][0].getPeça().primeiroM) {
     				return false;
     			}
     			
-    			if(!tabuleiro.campo[7][0].getPeça().canMove(tabuleiro, tabuleiro.campo[7][0], tabuleiro.campo[7][3],true)) {
+    			if(!Tabuleiro.campo[7][0].getPeça().canMove(tabuleiro, Tabuleiro.campo[7][0], Tabuleiro.campo[7][3],true)) {
     				return false;
     			}
     			if(xequedetect(tabuleiro,false)) {
@@ -417,13 +427,15 @@ public class Jogo{
     			}
     			
     			pulaCanMove(7,0,7,3);
-    			tabuleiro.campo[7][3].getPeça().primeiroM = false;
-    			tabuleiro.campo[7][2].getPeça().primeiroM = false;
+    			Tabuleiro.campo[7][3].getPeça().primeiroM = false;
+    			Tabuleiro.campo[7][2].getPeça().primeiroM = false;
 
     		}	
     	}
     	return true;
     }
+    
+    /// Mecanismo que realiza a jogada
     public boolean construtorJogada(Jogador j1, int Xinicial, int Yinicial, int Xfinal, int Yfinal,boolean verific)
     {
         Quadrado iniPos = tabuleiro.validade(Xinicial, Yinicial);
@@ -436,17 +448,20 @@ public class Jogo{
         return this.Jogada(move,j1,verific);
     }
 	
-	public Mov getUltimoMovimento() {
-        return ultimoMovimento;
-    }
-
+	
+	/// Função que desfaz uma jogada
     public void desfazerJogada(Mov move)
     {
 
-        this.tabuleiro.campo[move.getIni().getX()][move.getIni().getY()].setPeça(move.getPmov());
-        this.tabuleiro.campo[move.getFim().getX()][move.getFim().getY()].setPeça(move.getPmorta());
+        Tabuleiro.campo[move.getIni().getX()][move.getIni().getY()].setPeça(move.getPmov());
+        Tabuleiro.campo[move.getFim().getX()][move.getFim().getY()].setPeça(move.getPmorta());
     }
     
+	public Mov getUltimoMovimento() {
+        return ultimoMovimento;
+    }
+    
+    /// Função para mudar o turno
     public void mudaTurno() {
     	if(this.turno == jogadores[0])
         {
@@ -457,6 +472,7 @@ public class Jogo{
         }
     }
     
+    /// Verificador de jogada, esse envolve mais do que só a peça, envolve o tabuleiro e a condição do jogo.
     public boolean Jogada(Mov move, Jogador j, boolean verific)
     {
         Peça escolhida = move.getIni().getPeça();
@@ -517,24 +533,41 @@ public class Jogo{
         
         
         if(!verific) {
-        	
-        	if(this.tabuleiro.campo[move.getIni().getX()][move.getIni().getY()].getPeça() != null) {
-        	if(this.tabuleiro.campo[move.getIni().getX()][move.getIni().getY()].getPeça().getIdentidade() == 1) {
-        		movimento =0;
-        	}
-        	if(this.tabuleiro.campo[move.getFim().getX()][move.getFim().getY()].getPeça() != null) {
-        		movimento = 0;
-        	}
-        	
-        		}
-        	movimento ++;
-        	}
+            if(this.turno == jogadores [0]) {
+                    movimentoj1 ++;
+                    if(this.tabuleiro.campo[move.getIni().getX()][move.getIni().getY()].getPeça() != null) {
+                        if(this.tabuleiro.campo[move.getIni().getX()][move.getIni().getY()].getPeça().getIdentidade() == 1) {
+                            movimentoj1 =0;
+                        }
+                        if(this.tabuleiro.campo[move.getFim().getX()][move.getFim().getY()].getPeça() != null) {
+                            movimentoj1 = 0;
+                        }
+                    
+                    }
+                    
+                }
+            else {
+                movimentoj2 ++;
+                if(this.tabuleiro.campo[move.getIni().getX()][move.getIni().getY()].getPeça() != null) {
+                    if(this.tabuleiro.campo[move.getIni().getX()][move.getIni().getY()].getPeça().getIdentidade() == 1) {
+                        movimentoj2 =0;
+                        }
+                        if(this.tabuleiro.campo[move.getFim().getX()][move.getFim().getY()].getPeça() != null) {
+                            movimentoj2 = 0;
+                        }
+                    
+                    }
+                    
+                }
+                
+            }
         
         return true;
 
         
     }
 
+    /// Quando uma jogada é realizada ela deve ser codificada para que possa ser reproduzida futuramente na simulação.
     String codificaJogada(int xi, int yi, int xf, int yf)
     {
     	String codigo = new String();

@@ -1,12 +1,13 @@
 
 public class Bispo extends Peça{
 	public int identidade;
+	/// Construtor
 	public Bispo (boolean branca,int identidade,boolean primeiroM) {
 		 super(branca,identidade,primeiroM);
 
 	}
-	public Quadrado fBispo;
 	
+	/// validador de movimentos.
 	public boolean canMove(Tabuleiro tabuleiro,Quadrado inicio,Quadrado fim,boolean pm) {
 		//proibe de mover a peça para um lugar que tenha uma peça de mesma cor
 		if(fim.getPeça() != null && fim.getPeça().isBranca() == this.isBranca()) {
@@ -57,7 +58,7 @@ public class Bispo extends Peça{
 		
 		if(direção.equals("sudeste")) {				
 			for(int i=1; i<x ; i++) {
-					if(tabuleiro.campo[inicio.getX()+i][inicio.getY()+i].getPeça() !=null) {
+					if(Tabuleiro.campo[inicio.getX()+i][inicio.getY()+i].getPeça() !=null) {
 						return false;
 					}
 			}
@@ -65,21 +66,21 @@ public class Bispo extends Peça{
 			
 		if(direção.equals("nordeste")) {				
 			for(int i=1; i<x ; i++) {
-					if(tabuleiro.campo[inicio.getX()-i][inicio.getY()+i].getPeça() !=null) {
+					if(Tabuleiro.campo[inicio.getX()-i][inicio.getY()+i].getPeça() !=null) {
 						return false;
 					}
 			}
 		}
 		if(direção.equals("noroeste")) {				
 			for(int i=1; i<x ; i++) {
-					if(tabuleiro.campo[inicio.getX()+i][inicio.getY()-i].getPeça() !=null) {
+					if(Tabuleiro.campo[inicio.getX()+i][inicio.getY()-i].getPeça() !=null) {
 						return false;
 					}
 			}
 		}
 		if(direção.equals("sudoeste")) {				
 			for(int i=1; i<x ; i++) {
-					if(tabuleiro.campo[inicio.getX()-i][inicio.getY()-i].getPeça() !=null) {
+					if(Tabuleiro.campo[inicio.getX()-i][inicio.getY()-i].getPeça() !=null) {
 						return false;
 					}
 			}

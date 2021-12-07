@@ -2,20 +2,16 @@ import java.awt.FlowLayout;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Scanner;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 
 public class Menu {
     private static Jogador[] jogadores = new Jogador[2];
     public static menuPrincipal menu;
     public static JFrame mm;
-    private static Jogo jogo;
     public static void main(String[] args) throws FileNotFoundException {
 
         menu = new menuPrincipal ();
@@ -43,25 +39,23 @@ public class Menu {
                 public void mousePressed(MouseEvent a) {
                     
                     Point z = a.getPoint();
-                    System.out.println(z.x + "," + z.y);
                     
+                    /// Iniciar jogo
                     if((z.getX() > 146 && z.getX() < 455) && (z.getY() > 149 && z.getY() < 235)) {
                     	mm.dispose();
-                    	Telainicial iT = new Telainicial(jogadores[0],jogadores[1]);
-                    	
-                            
+                    	@SuppressWarnings("unused")
+						Telainicial iT = new Telainicial(jogadores[0],jogadores[1]);
                     }
+                    /// Tela com as instruções de como jogar
                     if((z.getX() > 154 && z.getX() < 457) && (z.getY() > 282 && z.getY() < 378)) {
-                            Instruções inst = new Instruções();
-                            
+                            @SuppressWarnings("unused")
+							Instruções inst = new Instruções();
                     }
+                    /// Sair
                     if((z.getX() > 155 && z.getX() < 457) && (z.getY() > 432 && z.getY() < 518)) {
                     	System.exit(0);
                     }
-                    
                 }
-                
-                
             });
         }
                 

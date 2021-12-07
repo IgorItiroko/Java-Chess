@@ -16,26 +16,35 @@ public class Peão extends Peça{
 		
 		//proibe de mover a peça mais do que 2 
 		if( this.primeiroM) {
-			if(x >2) {
-			return false;
-			}
+            if(x >2) {
+            return false;
+            }
 
-			if(tabuleiro.campo[fim.getX()][fim.getY()].getPeça()!= null && inicio.getY() == fim.getY()) {
-				return false;
-			}
-			if(this.isBranca()) {
-				if(tabuleiro.campo[inicio.getX() + 2][fim.getY()].getPeça()!= null && tabuleiro.campo[inicio.getX() + 2][fim.getY()].getPeça().isBranca() == !this.isBranca() ) {
-					return false;
-				}
-			}
-			if(!this.isBranca()) {
-				if(tabuleiro.campo[inicio.getX() - 2][fim.getY()].getPeça()!= null && tabuleiro.campo[inicio.getX() -2][fim.getY()].getPeça().isBranca() == !this.isBranca() ) {
-					return false;
-				}
-				
-			}
-			
-		}
+            if(Tabuleiro.campo[fim.getX()][fim.getY()].getPeça()!= null && inicio.getY() == fim.getY()) {
+                return false;
+            }
+            if(this.isBranca()) {
+                if(Tabuleiro.campo[inicio.getX() + 2][fim.getY()].getPeça()!= null ) {
+                    if(Tabuleiro.campo[inicio.getX() + 1][fim.getY()].getPeça()!= null) {
+                        return false;
+                    }
+                }                
+                if(inicio.getX() +2 == fim.getX() && inicio.getY() != fim.getY()) {
+                    return false;
+                }
+            }
+            if(!this.isBranca()) {
+                if(Tabuleiro.campo[inicio.getX() - 2][fim.getY()].getPeça()!= null ) {
+                    if(Tabuleiro.campo[inicio.getX() - 1][fim.getY()].getPeça()!= null){
+                        return false;
+                    }
+                }
+                if(inicio.getX() -2 == fim.getX() && inicio.getY() != fim.getY()) {
+                    return false;
+                }
+            }
+            
+        }
 		
 		//proibe de mover a peça mais do que 1 caso não seja o primeiro movimento
 		if(!this.primeiroM && x>1) {
@@ -43,7 +52,7 @@ public class Peão extends Peça{
 		}
 		
 		//proibe de mover a peça na diagonal
-		if((fim.getY() != inicio.getY()) && (tabuleiro.campo[fim.getX()][fim.getY()].getPeça() == null)) {
+		if((fim.getY() != inicio.getY()) && (Tabuleiro.campo[fim.getX()][fim.getY()].getPeça() == null)) {
 				return false;
 			}
 		
@@ -58,11 +67,11 @@ public class Peão extends Peça{
 				return false;
 			}
 			
-			if( this.isBranca() && tabuleiro.campo[inicio.getX()+1][inicio.getY()].getPeça() != null && fim.getY() == inicio.getY()) {
+			if( this.isBranca() && Tabuleiro.campo[inicio.getX()+1][inicio.getY()].getPeça() != null && fim.getY() == inicio.getY()) {
 				return false;
 			}
 			
-			if( !this.isBranca() && tabuleiro.campo[inicio.getX()-1][inicio.getY()].getPeça() != null && fim.getY() == inicio.getY()) {
+			if( !this.isBranca() && Tabuleiro.campo[inicio.getX()-1][inicio.getY()].getPeça() != null && fim.getY() == inicio.getY()) {
 				return false;
 			}
 		

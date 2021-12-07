@@ -1,26 +1,21 @@
-import java.awt.EventQueue;
-import java.awt.Image;
+
 import javax.swing.ImageIcon;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JDesktopPane;
 import java.awt.Color;
 import java.awt.Font;
 
 public class Telainicial{
 
     JFrame frame;
-    private JLabel lblNewLabel_1;
     private JTextField campo1;
     private JTextField campo2;
-    private static Jogador[] jogadores = new Jogador[2];
     ImageIcon menuImagem = new ImageIcon(getClass().getResource("/images/testeMenu.png"));
     JLabel menuInicial = new JLabel(menuImagem);
 
