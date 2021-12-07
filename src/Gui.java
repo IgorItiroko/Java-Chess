@@ -653,13 +653,26 @@ public class Gui extends JFrame{
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
-            while(readFile.hasNext())
-            {
-            	String ver = readFile.next();
-            	
-                jogadasSim.setText((jogadasSim.getText() + n + ". " + ver + " " + readFile.next() + "\n"));        
-                n++;
-            }
+            
+            	while(readFile.hasNext())
+                {
+                    String ver = readFile.next();
+                    if(Objects.equals(ver,roquedir))
+                    {
+                        jogadasSim.setText(jogadasSim.getText() + n + ". " + ver + "\n");
+                    }
+                    else
+                    {
+                        if(Objects.equals(ver, roqueesq))
+                        {
+                            jogadasSim.setText(jogadasSim.getText() + n + ". " + ver + "\n");
+                        }
+                        else
+                            jogadasSim.setText((jogadasSim.getText() + n + ". " + ver + " " + readFile.next() + "\n"));
+                    }
+
+                    n++;
+                }
             jogadasSim.setEditable(false);
             JPanel container = new JPanel();
             container.add(jogadasSim);
@@ -685,67 +698,65 @@ public class Gui extends JFrame{
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
+          
             telaSimula.addMouseListener(new MouseAdapter (){
             	public void mousePressed(MouseEvent h) {
-            		Point p = h.getPoint();
-            		 if((p.x > 550 && p.y > 450)&&(p.x < 700 && p.y <508)) {
-            			 if(leFile.hasNext()) {
-            			 
-            			 String qinicial = leFile.next();
-            			 
-            			 if(Objects.equals(qinicial, roquedir))
-                         {
-            					sjogo.isRoque(tabuleiro, sjogo.turno.isLadobranco(), true);
-            					sjogo.mudaTurno();
-                         }
-                         else 
-                         {
-                             if(Objects.equals(qinicial,roqueesq))
+                        Point p = h.getPoint();
+                         if((p.x > 550 && p.y > 450)&&(p.x < 700 && p.y <508)) {
+                             if(leFile.hasNext()) {
+                             
+                             String qinicial = leFile.next();
+                             
+                             if(Objects.equals(qinicial, roquedir))
                              {
-                                 sjogo.isRoque(tabuleiro, sjogo.turno.isLadobranco(), false);
-                                 sjogo.mudaTurno();
+                                    sjogo.isRoque(tabuleiro, sjogo.turno.isLadobranco(), true);
+                                    sjogo.mudaTurno();
                              }
-                             else
+                             else 
                              {
-                            	 switch(qinicial.charAt(0))
+                                 if(Objects.equals(qinicial,roqueesq))
                                  {
-                                     case 'a': {sXi = 0; break;} 
-                                     case 'b': {sXi = 1; break;}
-                                     case 'c': {sXi = 2; break;}
-                                     case 'd': {sXi = 3; break;}
-                                     case 'e': {sXi = 4; break;}
-                                     case 'f': {sXi = 5; break;}
-                                     case 'g': {sXi = 6; break;}
-                                     case 'h': {sXi = 7; break;}
+                                     sjogo.isRoque(tabuleiro, sjogo.turno.isLadobranco(), false);
+                                     sjogo.mudaTurno();
                                  }
-                                 sYi = Character.getNumericValue(qinicial.charAt(1));
+                                 else
+                                 {
+                                     switch(qinicial.charAt(0))
+                                     {
+                                         case 'a': {sXi = 0; break;} 
+                                         case 'b': {sXi = 1; break;}
+                                         case 'c': {sXi = 2; break;}
+                                         case 'd': {sXi = 3; break;}
+                                         case 'e': {sXi = 4; break;}
+                                         case 'f': {sXi = 5; break;}
+                                         case 'g': {sXi = 6; break;}
+                                         case 'h': {sXi = 7; break;}
+                                     }
+                                     sYi = Character.getNumericValue(qinicial.charAt(1));
 
-                                 String qfinal = leFile.next();
-                                 switch(qfinal.charAt(0))
-                                 {
-	                                 case 'a': {sXf = 0; break;} 
-	                                 case 'b': {sXf = 1; break;}
-	                                 case 'c': {sXf = 2; break;}
-	                                 case 'd': {sXf = 3; break;}
-	                                 case 'e': {sXf = 4; break;}
-	                                 case 'f': {sXf = 5; break;}
-	                                 case 'g': {sXf = 6; break;}
-	                                 case 'h': {sXf = 7; break;}
+                                     String qfinal = leFile.next();
+                                     switch(qfinal.charAt(0))
+                                     {
+                                         case 'a': {sXf = 0; break;} 
+                                         case 'b': {sXf = 1; break;}
+                                         case 'c': {sXf = 2; break;}
+                                         case 'd': {sXf = 3; break;}
+                                         case 'e': {sXf = 4; break;}
+                                         case 'f': {sXf = 5; break;}
+                                         case 'g': {sXf = 6; break;}
+                                         case 'h': {sXf = 7; break;}
+                                     }
+                                     sYf = Character.getNumericValue(qfinal.charAt(1));
+                                     sjogo.pulaCanMove(sYi, sXi, sYf, sXf);
+                                     sjogo.mudaTurno();
                                  }
-                                 sYf = Character.getNumericValue(qfinal.charAt(1));
-                                 sjogo.pulaCanMove(sYi, sXi, sYf, sXf);
-                                 sjogo.mudaTurno();
                              }
+                             
+                             simulaInicia(false);
+                             
                          }
-                         
-
-                         
-
-                         simulaInicia(false);
-                         telaSimula.getContentPane().validate();
-                         telaSimula.getContentPane().repaint();
-            			 
-            		 }
+            			 else
+            				 JOptionPane.showMessageDialog(null,"Simulação Acabou","Fim da Simulação",JOptionPane.INFORMATION_MESSAGE);
             	}
             	}
             	

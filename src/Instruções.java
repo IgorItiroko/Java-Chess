@@ -18,7 +18,6 @@ public class Instruções{
 	 JLabel p2 = new JLabel(pag2);
 	
 	public Instruções() {
-		System.out.println("Regras");
 		In = new JFrame();
 		In.setVisible(true);
 		In.setSize(800,830);
@@ -28,7 +27,6 @@ public class Instruções{
 		In.addMouseListener(new MouseAdapter () {
 			public void mousePressed(MouseEvent i) {
 				Point g = i.getPoint();
-				System.out.println(g.x + "," + g.y);
 				
 					if((g.x > 284 && g.y > 715) && (g.x < 496 && g.y <780)) {
 						In.dispose();
